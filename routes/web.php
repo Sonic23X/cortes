@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\MonetaryFlowController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\SettingsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,9 +25,9 @@ Auth::routes();
 
 Route::get('/inicio', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/pagos', function (Request $request) {
-   return view('courierPayment/payment_main_table.blade.php');
-});
 
-Route::resource('usuarios', UserController::class);
-Route::resource('flujo', MonetaryFlowController::class);
+Route::resource('/usuarios', UserController::class);
+Route::resource('/flujo', MonetaryFlowController::class);
+
+Route::get('/configuracion', [SettingsController::class, 'index']);
+Route::post('/concepto', [SettingsController::class, 'SaveConcept']);

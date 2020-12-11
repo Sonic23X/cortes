@@ -16,8 +16,9 @@ class CreateConceptsTable extends Migration
         Schema::create('concepts', function (Blueprint $table) {
             $table->id();
             $table->string('concept');
-            $table->integer('with_courier');
+            $table->integer('heading');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

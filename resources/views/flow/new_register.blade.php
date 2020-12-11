@@ -34,7 +34,16 @@
                             <form action="{{ url('/flujo') }}" method="POST">
                                 @csrf
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Tipo de Movimiento</label>
+                                            <div class="input-group mb-3">
+                                                <select class="form-control" name="tipo">
+                                                    <option value="1" selected="selected">Cargo</option>
+                                                    <option value="2">Pago</option>
+                                                </select>
+                                            </div>
+                                        </div>
                                         <div class="form-group">
                                             <label>Cantidad</label>
                                             <div class="input-group">
@@ -44,19 +53,21 @@
                                                 <input type="number" class="form-control" name="cantidad">
                                             </div>
                                         </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Elige Concepto</label>
+                                            <select class="form-control" name="concepto" id="concepto">
+                                                <option value="1" selected="selected">Pago a Repartidor</option>
+                                                <option value="2">Pago a Urbo</option>
+                                                <option value="3">Cobrado por el Repartidor</option>
+                                                <option value="4">Saldo Inicial</option>
+                                            </select>
+                                        </div>
                                         <div class="form-group">
                                             <label>Detalle:</label>
                                             <div class="input-group">
                                                 <input type="text" class="form-control" placeholder="Ingrese detalle" name="detalle">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Fecha:</label>
-                                            <div class="input-group">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
-                                                </div>
-                                                <input type="date" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" name="fecha">
                                             </div>
                                         </div>
                                         <div class="form-group" id="courier_input">
@@ -70,16 +81,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Elige Concepto</label>
-                                            <select class="form-control" name="concepto" id="concepto">
-                                                <option value="1" selected="selected">Pago a Repartidor</option>
-                                                <option value="2">Pago a Urbo</option>
-                                                <option value="3">Cobrado por el Repartidor</option>
-                                                <option value="4">Saldo Inicial</option>
-                                            </select>
-                                        </div>
+                                    <div class="col-md-4">
                                         <div class="form-group">
                                             <label>Cuenta</label>
                                             <select class="form-control" name="cuenta">
@@ -91,12 +93,12 @@
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <label>Tipo de Movimiento</label>
-                                            <div class="input-group mb-3">
-                                                <select class="form-control" name="tipo">
-                                                    <option value="1" selected="selected">Cargo</option>
-                                                    <option value="2">Abono</option>
-                                                </select>
+                                            <label>Fecha:</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                                </div>
+                                                <input type="date" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" name="fecha">
                                             </div>
                                         </div>
                                     </div>
@@ -133,6 +135,7 @@
                     $('#courier_input').hide();
                 }
             });
+
 
         });
     </script>
