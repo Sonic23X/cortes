@@ -4,13 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Concept extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
-    const NOT_COURIER = 0;
-    const HAS_COURIER = 1;
+    const HEADING_TO_COURIER = 1;
+    const HEADING_TO_URBO = 2;
+    const HEADING_OTHER = 3;
 
     /**
      * The attributes that are mass assignable.
@@ -19,6 +21,6 @@ class Concept extends Model
      */
     protected $fillable = [
         'concept',
-        'with_courier',
+        'heading',
     ];
 }
