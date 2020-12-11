@@ -20,14 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1228ad71-2666-4bd0-8546-9a873b38fe1a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/SettingsController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/settings/main.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Concept.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Concept.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_12_11_170918_create_concepts_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_12_11_170918_create_concepts_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/base/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/base/layouts/app.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/flow/new_register.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/flow/new_register.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/users/new_user.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/users/new_user.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -180,7 +173,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1607712875067</updated>
-      <workItem from="1607712876359" duration="8926000" />
+      <workItem from="1607712876359" duration="13919000" />
     </task>
     <servers />
   </component>
@@ -199,6 +192,10 @@
     </option>
   </component>
   <component name="WindowStateProjectService">
+    <state x="444" y="166" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1607727930141">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="444" y="166" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1366.728@0.0.1366.728" timestamp="1607727930141" />
     <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1607717899481">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
