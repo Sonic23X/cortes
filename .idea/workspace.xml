@@ -21,6 +21,14 @@
   <component name="ChangeListManager">
     <list default="true" id="1228ad71-2666-4bd0-8546-9a873b38fe1a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/courierPayment/payment_main_table.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/courierPayment/payment_main_table.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/courierPayment/payment_new_register.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/courierPayment/payment_new_register.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/summary/summary_cuts_detail.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/summary/summary_cuts_detail.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/summary/summary_main_table.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/summary/summary_main_table.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/summary/summary_payment_courier_detail.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/summary/summary_payment_courier_detail.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/summary/summary_payment_to_urbo_detail.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/summary/summary_payment_to_urbo_detail.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/users/new_user.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/users/new_user.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -173,7 +181,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1607712875067</updated>
-      <workItem from="1607712876359" duration="13919000" />
+      <workItem from="1607712876359" duration="16360000" />
     </task>
     <servers />
   </component>
@@ -196,6 +204,14 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="444" y="166" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1366.728@0.0.1366.728" timestamp="1607727930141" />
+    <state x="-7" y="0" width="697" height="735" key="dock-window-1" timestamp="1607730046006">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="-7" y="0" width="697" height="735" key="dock-window-1/0.0.1366.728@0.0.1366.728" timestamp="1607730046006" />
+    <state x="339" y="162" key="run.anything.popup" timestamp="1607730707778">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1607730707778" />
     <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1607717899481">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
