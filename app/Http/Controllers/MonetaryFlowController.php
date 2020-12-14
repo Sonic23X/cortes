@@ -85,14 +85,17 @@ class MonetaryFlowController extends Controller
         $balance = 0;
         $account = Account::find($request->get('cuenta'));
 
-        switch ($request->get('concepto')) 
+        // Get head of selected concept
+        $concept = Concept::where('id', $request->get('concepto'))->first();
+
+        switch ($concept->heading) 
         {
             case 1:
-                $balance = ( $request->get('tipo') == 1 ) ? $account->amount - $request->get('cantidad') : $account->amount + $request->get('cantidad');
+                $balance = $account->amount - $request->get('cantidad');
 
                 $data = 
                 [
-                    'concept' => AccountMovement::CONCEPT_PAYMENT_TO_COURIER,
+                    'concept' => $request->get('concepto'),
                     'details' => $request->get('detalle'),
                     'id_account' => $request->get('cuenta'),
                     'date' => $request->get('fecha'),
@@ -100,15 +103,14 @@ class MonetaryFlowController extends Controller
                     'amount' => $request->get('cantidad'),
                     'balance' => $balance
                 ];
-                //TO-DO: Relacionar movimiento con repartidor
 
                 break;
             case 2:
-                $balance = ( $request->get('tipo') == 1 ) ? $account->amount - $request->get('cantidad') : $account->amount + $request->get('cantidad');
+                $balance = $account->amount + $request->get('cantidad');
 
                 $data = 
                 [
-                    'concept' => AccountMovement::CONCEPT_PAYMENT_TO_URBO,
+                    'concept' => $request->get('concepto'),
                     'details' => $request->get('detalle'),
                     'id_account' => $request->get('cuenta'),
                     'date' => $request->get('fecha'),
@@ -116,13 +118,14 @@ class MonetaryFlowController extends Controller
                     'amount' => $request->get('cantidad'),
                     'balance' => $balance
                 ];
+
                 break;
             case 3:
                 $balance = ( $request->get('tipo') == 1 ) ? $account->amount - $request->get('cantidad') : $account->amount + $request->get('cantidad');
 
                 $data = 
                 [
-                    'concept' => AccountMovement::CONCEPT_CHARGED_BY_COURIER,
+                    'concept' => $request->get('concepto'),
                     'details' => $request->get('detalle'),
                     'id_account' => $request->get('cuenta'),
                     'date' => $request->get('fecha'),
@@ -130,23 +133,7 @@ class MonetaryFlowController extends Controller
                     'amount' => $request->get('cantidad'),
                     'balance' => $balance
                 ];
-
-                //TO-DO: Relacionar movimiento con repartidor
-                break;
-            case 4:
-                //TO-DO: Saldo inicial solo debe ser abono ¿no?
-                $balance = ( $request->get('tipo') == 1 ) ? $account->amount - $request->get('cantidad') : $account->amount + $request->get('cantidad');
-
-                $data = 
-                [
-                    'concept' => AccountMovement::CONCEPT_INITIAL_BALANCE,
-                    'details' => $request->get('detalle'),
-                    'id_account' => $request->get('cuenta'),
-                    'date' => $request->get('fecha'),
-                    'type' => ($request->get('tipo') == 1) ? AccountMovement::TYPE_CHARGE : AccountMovement::TYPE_PAYMENT,
-                    'amount' => $request->get('cantidad'),
-                    'balance' => $balance
-                ];
+                
                 break;
         }
 
