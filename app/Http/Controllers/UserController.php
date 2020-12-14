@@ -49,7 +49,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
+        $request->validate([
             'nombre' => ['required'],
             'status' => ['required', 'numeric'],
             'apellidos' => ['required'],
@@ -116,5 +116,35 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+    }
+    
+    public function setTerminal(Request $request)
+    {
+        $request->validate([
+            'terminal' => ['required'],
+            'id' => ['required'],
+        ]);
+        
+        $data = 
+        [
+            'terminal' => ($request->get('terminal') == 'off') ? null : $request->get('terminal') 
+        ];      
+
+        User::where('id', $request->get('id'))->update($data);
+    }
+
+    public function setStatus(Request $request)
+    {
+        $request->validate([
+            'status' => ['required', 'numeric'],
+            'id' => ['required'],
+        ]);
+
+        $data = 
+        [
+            'status' => ($request->get('status') == 0) ? User::NOT_ACTIVE : User::ACTIVE,
+        ];      
+
+        User::where('id', $request->get('id'))->update($data);
     }
 }
