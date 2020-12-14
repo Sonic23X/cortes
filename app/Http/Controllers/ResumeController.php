@@ -13,7 +13,11 @@ class ResumeController extends Controller
      */
     public function index()
     {
-        //
+        $view_data = 
+        [
+            'title' => 'Resumen',
+        ];
+        return view('summary/summary_main_table', $view_data);
     }
 
     /**

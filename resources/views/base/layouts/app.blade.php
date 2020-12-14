@@ -92,10 +92,10 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a href="{{ url( '/resumen') }}" class="nav-link">
                             <i class="nav-icon fas fa-money-check"></i>
                             <p>
-                                Movimientos
+                                Resumen
                             </p>
                         </a>
                     </li>
@@ -108,7 +108,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a href="{{ url( '/configuracion') }}" class="nav-link">
                             <i class="nav-icon fas fa-cog"></i>
                             <p>
                                 Configuración

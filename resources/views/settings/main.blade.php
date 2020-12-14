@@ -32,7 +32,6 @@
                                             <tr>
                                                 <th scope="col">#</th>
                                                 <th scope="col">Descripción</th>
-                                                <th scope="col">Acciones</th>
                                             </tr>
                                         </thead>
                                         <tbody id="conceptTableBody">
@@ -40,18 +39,6 @@
                                             <tr>
                                                 <td>{{ $concept->id }}</td>
                                                 <td>{{ $concept->concept }}</td>
-                                                <td>
-                                                    <div class="dropdown">
-                                                        <a class="btn btn-secondary dropdown-toggle" href="#" 
-                                                            role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                            Opciones
-                                                        </a>
-                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                            <a class="dropdown-item" href="#">Editar</a>
-                                                            <a class="dropdown-item" href="#">Eliminar</a>
-                                                        </div>
-                                                    </div>
-                                                </td>
                                             </tr>
                                         @endforeach
                                         </tbody>

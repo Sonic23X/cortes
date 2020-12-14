@@ -24,66 +24,72 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-6">
+                            <form action="{{ url('/usuarios') }}" method="POST">
+                            @csrf
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Nombre(s)</label>
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                                </div>
+                                                <input type="text" name="nombre" class="form-control" placeholder="Nombre(s)">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Status</label>
+                                            <select class="form-control select2" name="status">
+                                                <option value="1" selected="selected">Activo</option>
+                                                <option value="0">Inactivo</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>¿Se le asigna terminal?</label>
+                                            <select class="form-control select2">
+                                                <option value="1" selected="selected">Sí</option>
+                                                <option value="0">No</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Apellidos</label>
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                                </div>
+                                                <input type="text" name="apellidos" class="form-control" placeholder="Apellidos">
+                                            </div>
+                                        </div>
                                     <div class="form-group">
-                                        <label>Nombre Completo</label>
+                                        <label>Correo Electrónico</label>
                                         <div class="input-group mb-3">
                                             <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                                <span class="input-group-text"><i class="fas fa-envelope"></i></span>
                                             </div>
-                                            <input type="text" class="form-control" placeholder="Nombre y Apellido">
+                                            <input type="email" name="email" class="form-control" placeholder="Correo Electrónico">
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label>Status</label>
-                                        <select class="form-control select2" style="width: 100%;">
-                                            <option selected="selected">Activo</option>
-                                            <option>Inactivo</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>¿Se le asigna terminal?</label>
-                                        <select class="form-control select2" style="width: 100%;">
-                                            <option selected="selected">Sí</option>
-                                            <option>No</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Nombre Base de Datos</label>
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="fas fa-user"></i></span>
-                                            </div>
-                                            <input type="text" class="form-control" placeholder="Autocomplete">
-                                        </div>
-                                    </div>
-                                <div class="form-group">
-                                    <label>Correo Electrónico</label>
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="fas fa-envelope"></i></span>
-                                        </div>
-                                        <input type="email" class="form-control" placeholder="Correo Electrónico">
-                                    </div>
-                                </div>
 
-                                <div class="form-group">
-                                    <label>Número de Terminal</label>
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="fas fa-list-ol"></i></span>
+                                    <div class="form-group">
+                                        <label>Número de Terminal</label>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-list-ol"></i></span>
+                                            </div>
+                                            <input type="text" class="terminal" name="terminal" class="form-control" placeholder="Número de terminal">
                                         </div>
-                                        <input type="text" class="form-control" placeholder="Número de terminal">
                                     </div>
+
                                 </div>
-                            </div>
+                                </div>
+                                <div class="row">
+                                    <button type="submit" class="btn btn-block btn-primary">Registrar Usuario</button>
+                                </div>
+                                
+                            </form>
                         </div>    
-                        <div class="row">
-                            <button type="button" class="btn btn-block btn-primary">Registrar Usuario</button>
-                        </div>
                     </div>
                 </div>
             </div>

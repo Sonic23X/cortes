@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MonetaryFlowController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SettingsController;
+use App\Http\Controllers\ResumeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +28,7 @@ Route::get('/inicio', [App\Http\Controllers\HomeController::class, 'index'])->na
 
 Route::resource('/usuarios', UserController::class);
 Route::resource('/flujo', MonetaryFlowController::class);
+Route::resource('/resumen', ResumeController::class);
 
 Route::get('/configuracion', [SettingsController::class, 'index']);
 Route::post('/concepto', [SettingsController::class, 'SaveConcept']);

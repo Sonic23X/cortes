@@ -23,7 +23,7 @@
                                     <h3 class="card-title">Listado de Usuarios Registrados</h3>
                                 </div>
                                 <div class="col-sm-4"> 
-                                    <a href="#" class="btn btn-secondary float-right">Registrar</a>
+                                    <a href="{{ url( '/usuarios/create') }}" class="btn btn-secondary float-right">Registrar</a>
                                 </div>
                             </div>
                         </div>
@@ -36,38 +36,48 @@
                                         <th>Email</th>
                                         <th>Status</th>
                                         <th>Terminal</th>
-                                        <th>No.Terminal</th>
+                                        <th>No. Terminal</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>Fernando Guzmán</td>
-                                        <td>test@urbo.com</td>
-                                        <td>
-                                            <div class="custom-control custom-switch">
-                                                <input id="switchStatus" type="checkbox" class="custom-control-input"
-                                                    onclick="statusChange()" checked>
-                                                <label id="labelStatus" class="custom-control-label" for="switchStatus">Activo</label>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="custom-control custom-switch">
-                                                <input type="checkbox" class="custom-control-input" id="hasTerminal"
-                                                    onclick="terminalChange()" checked>
-                                                <label class="custom-control-label" for="hasTerminal" id="hasTerminalLabel">Sí</label>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="row">
-                                                <div class="col-sm-4"></div>
-                                                <div id="noTerminal" class="col-sm-4">25</div>
-                                                <div class="col-sm-4">
-                                                    <a href="#" onclick="editTerminalNumber()"><i id="editNoTerminal"
-                                                        class="fas fa-edit"></i></a>
+                                    @foreach ($couriers as $courier)
+                                        <tr>
+                                            <td>{{ $courier->name }} {{ $courier->last_name }} </td>
+                                            <td>{{ $courier->email }}</td>
+                                            <td>
+                                                <div class="custom-control custom-switch">
+                                                    <input id="switchStatus" type="checkbox" class="custom-control-input"
+                                                        onclick="statusChange()" @if($courier->status == 1) checked @endif>
+                                                    <label id="labelStatus" class="custom-control-label" for="switchStatus">Activo</label>
                                                 </div>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                            </td>
+                                            <td>
+                                                <div class="custom-control custom-switch">
+                                                    <input type="checkbox" class="custom-control-input" id="hasTerminal"
+                                                        onclick="terminalChange()" @if($courier->terminal != null) checked @endif>
+                                                    <label class="custom-control-label" for="hasTerminal" id="hasTerminalLabel">Sí</label>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="row">
+                                                    <div class="col-sm-4"></div>
+                                                    <div id="noTerminal" class="col-sm-4">
+                                                    @if($courier->terminal == null)
+                                                        <span>Sin terminal</span>
+                                                    @else
+                                                        <span>{{ $courier->terminal }}</span>
+                                                    @endif
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                    @if($courier->terminal != null)
+                                                        <a href="#" onclick="editTerminalNumber()"><i id="editNoTerminal"
+                                                                class="fas fa-edit"></i></a>
+                                                    @endif
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                                 <tfoot>
                                     <tr>

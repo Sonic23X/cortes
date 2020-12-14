@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+
 use App\Models\Account;
+use App\Models\User;
 
 class UserController extends Controller
 {
@@ -17,6 +20,7 @@ class UserController extends Controller
         $view_data = 
         [
             'title' => 'Usuarios',
+            'couriers' => User::typeCourier( )->get( ),
         ];
 
         return view( 'users/users_table', $view_data );
@@ -45,7 +49,28 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'nombre' => ['required'],
+            'status' => ['required', 'numeric'],
+            'apellidos' => ['required'],
+            'email' => ['required'],
+            'terminal' => [],
+        ]);
+
+        $data = 
+        [
+            'name' => $request->get('nombre'),
+            'last_name' => $request->get('apellidos'),
+            'email' => $request->get('email'),
+            'password' => Hash::make('123456789'),
+            'status' => ($request->get('status') == 1) ? User::ACTIVE : User::NOT_ACTIVE,
+            'terminal' => ($request->get('termianl') != '') ? $request->get('termianl') : null ,
+            'type' => User::TYPE_COURIER,
+        ];
+
+        User::create($data);
+
+        return redirect('/usuarios');
     }
 
     /**
