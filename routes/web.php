@@ -32,7 +32,9 @@ Route::put('/usuarios/updateStatus', [UserController::class, 'setStatus']);
 Route::put('/usuarios/updateTerminal', [UserController::class, 'setTerminal']);
 
 Route::resource('/flujo', MonetaryFlowController::class);
+
 Route::resource('/resumen', ResumeController::class);
+Route::post('/corte', [ResumeController::class, 'nuevoCorte']);
 
 Route::resource('/pagos', ChargeController::class);
 

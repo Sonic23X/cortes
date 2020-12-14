@@ -64,7 +64,7 @@ class UserController extends Controller
             'email' => $request->get('email'),
             'password' => Hash::make('123456789'),
             'status' => ($request->get('status') == 1) ? User::ACTIVE : User::NOT_ACTIVE,
-            'terminal' => ($request->get('termianl') != '') ? $request->get('termianl') : null ,
+            'terminal' => ($request->get('terminal') != '') ? $request->get('termianl') : null ,
             'type' => User::TYPE_COURIER,
         ];
 

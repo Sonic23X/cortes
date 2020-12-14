@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
+use App\Models\History;
 
 class ResumeController extends Controller
 {
@@ -13,9 +15,20 @@ class ResumeController extends Controller
      */
     public function index()
     {
+        $couriers = User::typeCourier()->get();
+
+        $autocomplete = $couriers->map(function($courier) {
+            
+            return [
+                $courier->id,
+                $courier->name . ' ' . $courier->last_name,
+            ];
+        });
+
         $view_data = 
         [
             'title' => 'Resumen',
+            'couriers' => $autocomplete,
         ];
         return view('summary/summary_main_table', $view_data);
     }
@@ -84,5 +97,25 @@ class ResumeController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function nuevoCorte(Request $request)
+    {
+        $request->validate([
+            'nombre' => ['required'],
+            'repartidor' => ['required', 'numeric'],
+            'monto' => ['required', 'numeric'],
+        ]);
+
+        $data = 
+        [
+            'id_courier' => $request->get('repartidor'),
+            'name' => $request->get('nombre'),
+            'amount' => $request->get('monto'),
+        ];
+
+        History::create($data);
+
+        return response(['message' => '¡Corte registrado!'], 200);
     }
 }

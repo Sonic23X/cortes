@@ -37,7 +37,6 @@
                                         <th>Repartidor</th>
                                         <th>Monto</th>
                                         <th>Negocio</th>
-                                        <th>Tipo de Pago</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -57,7 +56,6 @@
                                             </div>
                                         </td>
                                         <td>{{ $payment[5] }}</td>
-                                        <td>{{ $payment[6] }}</td>
                                     </tr>
                                     @endforeach
                                 </tbody>
@@ -68,7 +66,6 @@
                                         <th>Repartidor</th>
                                         <th>Monto</th>
                                         <th>Negocio</th>
-                                        <th>Tipo de Pago</th>
                                     </tr>
                                 </tfoot>
                             </table>

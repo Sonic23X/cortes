@@ -22,6 +22,7 @@ class CreateAccountMovementsTable extends Migration
             $table->string('type');
             $table->float('amount');
             $table->float('balance')->nullable();
+            $table->unsignedInteger('id_courier')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
