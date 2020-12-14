@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Place;
 use App\Models\User;
 
 class ChargeController extends Controller
@@ -38,10 +39,21 @@ class ChargeController extends Controller
             ];
         });
 
+        $places = Place::all();
+
+        $place_map = $places->map(function($place) {
+            
+            return [
+                $place->id,
+                $place->name 
+            ];
+        });
+
         $view_data = 
         [
             'title' => 'Pagos',
             'couriers' => $autocomplete,
+            'places' => $place_map,
         ];
         return view('courierPayment/payment_new_register', $view_data);
     }
@@ -54,7 +66,16 @@ class ChargeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'fecha' => ['required'],
+            'monto' => ['required'],
+            'metodo' => ['required'],
+            'repartidor' => ['required'],
+            'pedido' => ['required'],
+            'negocio' => ['required'],
+        ]);
+
+
     }
 
     /**

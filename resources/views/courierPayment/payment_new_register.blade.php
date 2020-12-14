@@ -24,7 +24,16 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <form action="{{ url('/pagosPorRepartidor') }}" method="POST">
+                            @if ($errors->any())
+                            <div class="alert alert-danger" role="alert">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                            @endif
+                            <form action="{{ url('/pagos') }}" method="POST">
                                 @csrf
                                 <div class="row">
                                     <div class="col-md-6">
@@ -51,7 +60,9 @@
                                         <div class="form-group">
                                             <label>Negocio</label>
                                             <select class="form-control select2" style="width: 100%;" name="lugares">
-                                                
+                                                @foreach ($places as $place)
+                                                    <option value="{{ $place[0] }}">{{ $place[1] }}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
@@ -87,7 +98,7 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <button type="button" class="btn btn-block btn-primary">Registrar Pago</button>
+                                    <button type="submit" class="btn btn-block btn-primary">Registrar Pago</button>
                                 </div>
                             </form>
                         </div>
