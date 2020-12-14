@@ -30,3 +30,5 @@ Route::resource('/flujo', MonetaryFlowController::class);
 
 Route::get('/configuracion', [SettingsController::class, 'index']);
 Route::post('/concepto', [SettingsController::class, 'SaveConcept']);
+Route::put('/concepto', [SettingsController::class, 'SaveConcept']);
+Route::post('/cuenta', [SettingsController::class, 'SaveAccount']);
