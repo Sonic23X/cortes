@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\History;
+use App\Models\Payment;
+use App\Models\AccountMovement;
 
 class ResumeController extends Controller
 {
@@ -25,10 +27,31 @@ class ResumeController extends Controller
             ];
         });
 
+        $tableColumns = $couriers->map(function($courier) {
+            
+            $pedidos_cobrados = Payment::getAmountPerCourier($courier->id);
+            $pagos_a_urbo = AccountMovement::paymentsToUrbo($courier->id);
+            $pagos_a_repartidor = AccountMovement::paymentsToCourier($courier->id);
+            $cortes = History::historyPerCourier($courier->id);
+
+            $saldo = $pedidos_cobrados + $cortes - $pagos_a_urbo - $pagos_a_repartidor;
+
+            return [
+                $courier->id,
+                $courier->name . ' ' . $courier->last_name,
+                $pedidos_cobrados,
+                $pagos_a_urbo,
+                $pagos_a_repartidor,
+                $cortes,
+                $saldo,
+            ];
+        });
+
         $view_data = 
         [
             'title' => 'Resumen',
             'couriers' => $autocomplete,
+            'columns' => $tableColumns,
         ];
         return view('summary/summary_main_table', $view_data);
     }

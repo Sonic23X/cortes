@@ -17,4 +17,13 @@ class Payment extends Model
         'amount',
         'id_place',
     ];
+
+
+    public static function getAmountPerCourier($id_courier)
+    {   
+        $quantities = (new static)::where('id_courier', $id_courier)->sum('amount');
+
+        return $quantities;
+        
+    }
 }

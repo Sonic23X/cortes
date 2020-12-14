@@ -19,6 +19,7 @@ class CreateHistoriesTable extends Migration
             $table->string('name');
             $table->float('amount');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

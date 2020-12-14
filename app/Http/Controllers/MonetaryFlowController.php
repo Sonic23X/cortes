@@ -101,7 +101,8 @@ class MonetaryFlowController extends Controller
                     'date' => $request->get('fecha'),
                     'type' => ($request->get('tipo') == 1) ? AccountMovement::TYPE_CHARGE : AccountMovement::TYPE_PAYMENT,
                     'amount' => $request->get('cantidad'),
-                    'balance' => $balance
+                    'balance' => $balance,
+                    'id_courier' => $request->get('repartidor')
                 ];
 
                 break;
@@ -116,7 +117,8 @@ class MonetaryFlowController extends Controller
                     'date' => $request->get('fecha'),
                     'type' => ($request->get('tipo') == 1) ? AccountMovement::TYPE_CHARGE : AccountMovement::TYPE_PAYMENT,
                     'amount' => $request->get('cantidad'),
-                    'balance' => $balance
+                    'balance' => $balance,
+                    'id_courier' => $request->get('repartidor')
                 ];
 
                 break;
@@ -131,7 +133,8 @@ class MonetaryFlowController extends Controller
                     'date' => $request->get('fecha'),
                     'type' => ($request->get('tipo') == 1) ? AccountMovement::TYPE_CHARGE : AccountMovement::TYPE_PAYMENT,
                     'amount' => $request->get('cantidad'),
-                    'balance' => $balance
+                    'balance' => $balance,
+                    'id_courier' => null,
                 ];
                 
                 break;

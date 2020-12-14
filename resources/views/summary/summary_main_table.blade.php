@@ -84,12 +84,13 @@
                             </tr>
                         </thead>
                         <tbody style="text-align: center;">
+                            @foreach($columns as $column)
                             <tr>
-                                <td>Eduardo Ortega</td>
+                                <td>{{ $column[1] }}</td>
                                 <td>
                                     <div class="row">
                                         <div class="col-sm-2"></div>
-                                        <div id="noTerminal" class="col-sm-6">$3255.00</div>
+                                        <div id="noTerminal" class="col-sm-6">${{ $column[2] }}</div>
                                         <div class="col-sm-4">
                                             <a href="#"><i class="fas fa-info-circle"></i></a></div>
                                     </div>
@@ -97,7 +98,7 @@
                                 <td>
                                     <div class="row">
                                         <div class="col-sm-2"></div>
-                                        <div id="noTerminal" class="col-sm-6">$3255.00</div>
+                                        <div id="noTerminal" class="col-sm-6">${{ $column[3] }}</div>
                                         <div class="col-sm-4">
                                             <a href="#"><i class="fas fa-info-circle"></i></a></div>
                                     </div>
@@ -105,7 +106,7 @@
                                 <td>
                                     <div class="row">
                                         <div class="col-sm-2"></div>
-                                        <div id="noTerminal" class="col-sm-6">$3255.00</div>
+                                        <div id="noTerminal" class="col-sm-6">${{ $column[4] }}</div>
                                         <div class="col-sm-4">
                                             <a href="#"><i class="fas fa-info-circle"></i></a></div>
                                     </div>
@@ -113,13 +114,14 @@
                                 <td>
                                     <div class="row">
                                         <div class="col-sm-2"></div>
-                                        <div id="noTerminal" class="col-sm-6">$3255.00</div>
+                                        <div id="noTerminal" class="col-sm-6">${{ $column[5] }}</div>
                                         <div class="col-sm-4">
                                             <a href="#"><i class="fas fa-info-circle"></i></a></div>
                                     </div>
                                 </td>
-                                <td>$7925.00</td>
+                                <td>${{ $column[6] }}</td>
                             </tr>
+                            @endforeach
                         </tbody>
                         <tfoot>
                             <tr style="text-align: center;">
@@ -138,8 +140,7 @@
         </div>
 
         <!--MODAL-->
-        <div class="modal fade" id="corteModal" tabindex="-1" role="dialog" aria-labelledby="corteModalLabel"
-                         aria-hidden="true">
+        <div class="modal fade" id="corteModal" tabindex="-1" role="dialog" aria-labelledby="corteModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">

@@ -15,6 +15,15 @@ class History extends Model
         'id_courier',
         'amount',
     ];
+
+    public static function historyPerCourier($id_courier)
+    {   
+        $instance = new static;
+
+        $accumulated = $instance::where('id_courier', $id_courier)->sum('amount');
+
+        return $accumulated;
+    }
     
 }
 
