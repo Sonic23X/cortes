@@ -20,7 +20,6 @@ class CreatePaymentsTable extends Migration
             $table->unsignedInteger('id_courier');
             $table->float('amount');
             $table->unsignedInteger('id_place');
-            $table->string('type');
             $table->timestamps();
             $table->softDeletes();
         });

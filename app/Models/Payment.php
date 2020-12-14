@@ -16,6 +16,5 @@ class Payment extends Model
         'id_courier',
         'amount',
         'id_place',
-        'type',
     ];
 }

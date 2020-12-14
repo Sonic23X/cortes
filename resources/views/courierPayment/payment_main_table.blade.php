@@ -31,43 +31,45 @@
                         <div class="card-body">
                             <table id="tablaPagos" class="table table-bordered table-striped text-center">
                                 <thead>
-                                <tr>
-                                    <th>Fecha</th>
-                                    <th>No. Pedido</th>
-                                    <th>Repartidor</th>
-                                    <th>Monto</th>
-                                    <th>Negocio</th>
-                                    <th>Tipo de Pago</th>
-                                </tr>
+                                    <tr>
+                                        <th>Fecha</th>
+                                        <th>No. Pedido</th>
+                                        <th>Repartidor</th>
+                                        <th>Monto</th>
+                                        <th>Negocio</th>
+                                        <th>Tipo de Pago</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>05/12/2020</td>
-                                    <td>3025</td>
-                                    <td>Enriqueta Barba</td>
-                                    <td>
-                                        <div class="row">
-                                            <div class="col-sm-4"></div>
-                                            <div id="noTerminal" class="col-sm-4">$325.00</div>
-                                            <div class="col-sm-4">
-                                                <a href="#" onclick="editPaymentAmount()"><i id="editPaymentAmount"
-                                                                                              class="fas fa-edit"></i></a>
+                                    @foreach($payments as $payment)
+                                    <tr>
+                                        <td>{{ $payment[1] }}</td>
+                                        <td>{{ $payment[2] }}</td>
+                                        <td>{{ $payment[3] }}</td>
+                                        <td>
+                                            <div class="row">
+                                                <div class="col-sm-4"></div>
+                                                <div id="noTerminal" class="col-sm-4">${{ $payment[4] }}</div>
+                                                <div class="col-sm-4">
+                                                    <a href="#" onclick="editPaymentAmount()"><i id="editPaymentAmount"
+                                                                                                class="fas fa-edit"></i></a>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </td>
-                                    <td>Oishii Roll</td>
-                                    <td>Efectivo</td>
-                                </tr>
+                                        </td>
+                                        <td>{{ $payment[5] }}</td>
+                                        <td>{{ $payment[6] }}</td>
+                                    </tr>
+                                    @endforeach
                                 </tbody>
                                 <tfoot>
-                                <tr>
-                                    <th>Fecha</th>
-                                    <th>No. Pedido</th>
-                                    <th>Repartidor</th>
-                                    <th>Monto</th>
-                                    <th>Negocio</th>
-                                    <th>Tipo de Pago</th>
-                                </tr>
+                                    <tr>
+                                        <th>Fecha</th>
+                                        <th>No. Pedido</th>
+                                        <th>Repartidor</th>
+                                        <th>Monto</th>
+                                        <th>Negocio</th>
+                                        <th>Tipo de Pago</th>
+                                    </tr>
                                 </tfoot>
                             </table>
                         </div>

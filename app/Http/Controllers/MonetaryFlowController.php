@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\AccountMovement;
 use App\Models\Account;
+use App\Models\Concept;
 use App\Models\User;
 
 class MonetaryFlowController extends Controller
@@ -50,6 +51,7 @@ class MonetaryFlowController extends Controller
         [
             'title' => 'Dashboard',
             'couriers' => $autocomplete,
+            'concepts' => Concept::all(),
         ];
         return view( 'flow.new_register', $view_data );
     }

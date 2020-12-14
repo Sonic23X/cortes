@@ -46,12 +46,12 @@
                                                         class="far fa-calendar-alt"></i></span>
                                                 </div>
                                                 <input type="date" class="form-control" data-inputmask-alias="datetime"
-                                                       data-inputmask-inputformat="dd/mm/yyyy" data-mask name="fechaPago">
+                                                       data-inputmask-inputformat="dd/mm/yyyy" data-mask name="fecha">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label>Repartidor</label>
-                                            <select class="form-control select2" style="width: 100%;" name="repartidorPago">
+                                            <select class="form-control select2" name="repartidor">
                                                 @foreach ($couriers as $courier)
                                                     <option value="{{ $courier[0] }}">{{ $courier[1] }}</option>
                                                 @endforeach
@@ -59,7 +59,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label>Negocio</label>
-                                            <select class="form-control select2" style="width: 100%;" name="lugares">
+                                            <select class="form-control select2" name="negocio">
                                                 @foreach ($places as $place)
                                                     <option value="{{ $place[0] }}">{{ $place[1] }}</option>
                                                 @endforeach
@@ -74,7 +74,7 @@
                                                 <span class="input-group-text"><i
                                                         class="fas fa-truck-loading"></i></span>
                                                 </div>
-                                                <input type="number" class="form-control" placeholder="No. Pedido" name="pedidoPago">
+                                                <input type="number" class="form-control" placeholder="No. Pedido" name="pedido">
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -83,16 +83,7 @@
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text">$</span>
                                                 </div>
-                                                <input type="text" class="form-control" name="montoPago">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Tipo de Pago</label>
-                                            <div class="input-group mb-3">
-                                                <select class="form-control select2" style="width: 100%;" name="tipoPagoPagos">
-                                                    <option value="0" selected>Efectivo</option>
-                                                    <option value="1">Tarjeta</option>
-                                                </select>
+                                                <input type="number" class="form-control" name="monto">
                                             </div>
                                         </div>
                                     </div>

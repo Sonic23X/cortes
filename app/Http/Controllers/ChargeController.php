@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Place;
 use App\Models\User;
+use App\Models\Payment;
+use App\Models\Concept;
 
 class ChargeController extends Controller
 {
@@ -15,9 +17,29 @@ class ChargeController extends Controller
      */
     public function index()
     {
+
+        $payments = Payment::all();
+
+        $payments_map = $payments->map(function($payment) {
+            
+            $courier = User::where('id', $payment->id_courier)->first();
+            $place = Place::where('id', $payment->id_place)->first();
+
+            return [
+                $payment->id,
+                $payment->date,
+                $payment->id_order,
+                $courier->name . ' ' . $courier->last_name,
+                $payment->amount,
+                $place->name,
+                $payment->type,
+            ];
+        });
+
         $view_data = 
         [
             'title' => 'Pagos',
+            'payments' => $payments_map,
         ];
         return view('courierPayment/payment_main_table', $view_data);
     }
@@ -69,13 +91,22 @@ class ChargeController extends Controller
         $request->validate([
             'fecha' => ['required'],
             'monto' => ['required'],
-            'metodo' => ['required'],
             'repartidor' => ['required'],
             'pedido' => ['required'],
             'negocio' => ['required'],
         ]);
 
+        $data = [
+            'date' => $request->get('fecha'),
+            'id_order' => $request->get('pedido'),
+            'id_courier' => $request->get('repartidor'),
+            'amount' => $request->get('monto'),
+            'id_place' => $request->get('negocio'),
+        ];
 
+        Payment::create($data);
+
+        return redirect('/pagos');
     }
 
     /**

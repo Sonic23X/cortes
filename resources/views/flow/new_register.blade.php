@@ -67,10 +67,9 @@
                                         <div class="form-group">
                                             <label>Elige Concepto</label>
                                             <select class="form-control" name="concepto" id="concepto">
-                                                <option value="1" selected="selected">Pago a Repartidor</option>
-                                                <option value="2">Pago a Urbo</option>
-                                                <option value="3">Cobrado por el Repartidor</option>
-                                                <option value="4">Saldo Inicial</option>
+                                                @foreach ($concepts as $concept)
+                                                    <option value="{{ $concept->id }}">{{ $concept->concept }}</option>                                    
+                                                @endforeach
                                             </select>
                                         </div>
                                         <div class="form-group">
