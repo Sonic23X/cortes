@@ -50,8 +50,9 @@
                                         </div>
                                         <div class="form-group">
                                             <label>Negocio</label>
-                                            <input type="text" class="form-control"
-                                                   placeholder="Autocomplete de negocios" name="placesPagos">
+                                            <select class="form-control select2" style="width: 100%;" name="lugares">
+                                                
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -72,18 +73,14 @@
                                                     <span class="input-group-text">$</span>
                                                 </div>
                                                 <input type="text" class="form-control" name="montoPago">
-                                                <div class="input-group-append">
-                                                    <span class="input-group-text">.00</span>
-                                                </div>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label>Tipo de Pago</label>
                                             <div class="input-group mb-3">
                                                 <select class="form-control select2" style="width: 100%;" name="tipoPagoPagos">
-                                                    @foreach ($paymentTypes as $paymentType)
-                                                        <option value="{{ $paymentType[0] }}">{{ $paymentType[1] }}</option>
-                                                    @endforeach
+                                                    <option value="0" selected>Efectivo</option>
+                                                    <option value="1">Tarjeta</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -105,13 +102,10 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-            $("#tablaPagos").DataTable({
-                "responsive": true,
-                "lengthChange": false,
-                "autoWidth": false,
-                "responsive": true,
-                "buttons": ['excel', 'pdf', 'colvis']
-            }).buttons().container().appendTo('#tablaPagos_wrapper .col-md-6:eq(0)');
+            $('.select2').select2(
+            {
+                theme: 'bootstrap4',
+            });
         });
     </script>
 

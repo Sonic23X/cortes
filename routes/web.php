@@ -6,6 +6,7 @@ use App\Http\Controllers\MonetaryFlowController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\ResumeController;
+use App\Http\Controllers\ChargeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +33,8 @@ Route::put('/usuarios/updateTerminal', [UserController::class, 'setTerminal']);
 
 Route::resource('/flujo', MonetaryFlowController::class);
 Route::resource('/resumen', ResumeController::class);
+
+Route::resource('/pagos', ChargeController::class);
 
 Route::get('/configuracion', [SettingsController::class, 'index']);
 Route::post('/concepto', [SettingsController::class, 'SaveConcept']);

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class ChargeController extends Controller
 {
@@ -13,7 +14,11 @@ class ChargeController extends Controller
      */
     public function index()
     {
-        //
+        $view_data = 
+        [
+            'title' => 'Pagos',
+        ];
+        return view('courierPayment/payment_main_table', $view_data);
     }
 
     /**
@@ -23,7 +28,22 @@ class ChargeController extends Controller
      */
     public function create()
     {
-        //
+        $couriers = User::typeCourier()->get();
+
+        $autocomplete = $couriers->map(function($courier) {
+            
+            return [
+                $courier->id,
+                $courier->name . ' ' . $courier->last_name,
+            ];
+        });
+
+        $view_data = 
+        [
+            'title' => 'Pagos',
+            'couriers' => $autocomplete,
+        ];
+        return view('courierPayment/payment_new_register', $view_data);
     }
 
     /**

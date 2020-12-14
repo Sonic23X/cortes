@@ -100,7 +100,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a href="{{ url('/pagos') }}" class="nav-link">
                             <i class="nav-icon fas fa-money-bill-wave"></i>
                             <p>
                                 Cobros
