@@ -25,11 +25,6 @@ Auth::routes();
 
 Route::get('/inicio', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-
-Route::get('/pagos', function (Request $request) {
-    return view('summary/summary_payment_to_urbo_detail');
-});
-
 Route::resource('/usuarios', UserController::class);
 Route::resource('/flujo', MonetaryFlowController::class);
 
