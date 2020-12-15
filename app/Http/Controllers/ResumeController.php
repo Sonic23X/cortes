@@ -33,6 +33,7 @@ class ResumeController extends Controller
             $pedidos_cobrados = Payment::getAmountPerCourier($courier->id);
             $pagos_a_urbo = AccountMovement::paymentsToUrbo($courier->id);
             $pagos_a_repartidor = AccountMovement::paymentsToCourier($courier->id);
+
             $cortes = History::historyPerCourier($courier->id);
 
             $saldo = $pedidos_cobrados + $cortes - $pagos_a_urbo - $pagos_a_repartidor;
@@ -175,56 +176,32 @@ class ResumeController extends Controller
     {
         $courier = User::find($id);
 
-        $pedidos_cobrados = Payment::where('id_courier', $id)->get();
-
-        $tableColumns = $pedidos_cobrados->map(function($pedido) 
-        {
-            $negocio = Place::find($pedido->id_place);
-
-            return [
-                $pedido->date,
-                $pedido->id_order,
-                $negocio->name,
-                $pedido->amount,
-            ];
-        });
+        $pagos_urbo = AccountMovement::where('id_courier', $id)->typeToUrbo()->get();
 
         $view_data = 
         [
             'title' => 'Usuarios',
             'courier' => $courier,
-            'columns' => $tableColumns,
+            'columns' => $pagos_urbo,
         ];
 
-        return view( 'summary/summary_payment_courier_detail', $view_data );
+        return view( 'summary/summary_payment_to_urbo_detail', $view_data );
     }
 
     public function detallesPagosRepartidor($id)
     {
         $courier = User::find($id);
 
-        $pedidos_cobrados = Payment::where('id_courier', $id)->get();
-
-        $tableColumns = $pedidos_cobrados->map(function($pedido) 
-        {
-            $negocio = Place::find($pedido->id_place);
-
-            return [
-                $pedido->date,
-                $pedido->id_order,
-                $negocio->name,
-                $pedido->amount,
-            ];
-        });
+        $pagos_repartidor = AccountMovement::where('id_courier', $id)->typeToCourier()->get();
 
         $view_data = 
         [
             'title' => 'Usuarios',
             'courier' => $courier,
-            'columns' => $tableColumns,
+            'columns' => $pagos_repartidor,
         ];
 
-        return view( 'summary/summary_payment_courier_detail', $view_data );
+        return view( 'summary/summary_payment_to_courier_detail', $view_data );
     }
 
     public function detallesCortes($id)

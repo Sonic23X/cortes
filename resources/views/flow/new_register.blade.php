@@ -93,11 +93,9 @@
                                         <div class="form-group">
                                             <label>Cuenta</label>
                                             <select class="form-control" name="cuenta">
-                                                <option selected="selected" value="1">Sergio BBVA</option>
-                                                <option value="2">Antonio BBVA</option>
-                                                <option value="3">Ouvio BBVA</option>
-                                                <option value="4">Mercado Pago</option>
-                                                <option value="5">Efectivo</option>
+                                            @foreach ($accounts as $account)
+                                                <option value="{{ $account->id }}">{{ $account->name }}</option>                                    
+                                            @endforeach
                                             </select>
                                         </div>
                                         <div class="form-group">

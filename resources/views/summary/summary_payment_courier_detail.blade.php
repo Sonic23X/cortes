@@ -19,7 +19,7 @@
                         <div class="card-header">
                             <div class="row">
                                 <div class="col-sm-8">
-                                    <h3 class="card-title">Detalle Pedidos Cobrados de {{ $courier->name }} {{ $courier->last_name }} </h3>
+                                    <h3 class="card-title">Detalle Pedidos Cobrados de {{ $courier->name }} {{ $courier->last_name }}</h3>
                                 </div>
                             </div>
                         </div>

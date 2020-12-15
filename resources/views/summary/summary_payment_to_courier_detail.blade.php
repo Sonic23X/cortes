@@ -19,7 +19,7 @@
                         <div class="card-header">
                             <div class="row">
                                 <div class="col-sm-8">
-                                    <h3 class="card-title">Pagos hechos a Urbo de {{ $courier->name }} {{ $courier->last_name }}</h3>
+                                    <h3 class="card-title">Pagos hechos al repartidor {{ $courier->name }} {{ $courier->last_name }}</h3>
                                 </div>
                             </div>
                         </div>
@@ -32,12 +32,12 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($columns as $column)
+                                @foreach($columns as $column)
                                     <tr>
                                         <td>{{ $column->date }}</td>
                                         <td>${{ $column->amount }}</td>
                                     </tr>
-                                    @endforeach
+                                @endforeach
                                 </tbody>
                                 <tfoot>
                                     <tr>

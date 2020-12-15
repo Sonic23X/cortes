@@ -52,6 +52,7 @@ class MonetaryFlowController extends Controller
             'title' => 'Dashboard',
             'couriers' => $autocomplete,
             'concepts' => Concept::all(),
+            'accounts' => Account::all(),
         ];
         return view( 'flow.new_register', $view_data );
     }

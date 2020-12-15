@@ -34,12 +34,11 @@ class AccountMovement extends Model
         'id_courier'
     ];
 
-
     public static function paymentsToUrbo($id_courier)
     {   
         $instance = new static;
 
-        $accumulated = $instance::where('id_courier', $id_courier)->where('type', $instance::CONCEPT_PAYMENT_TO_URBO)->sum('amount');
+        $accumulated = $instance::where('id_courier', $id_courier)->where('concept', $instance::CONCEPT_PAYMENT_TO_URBO)->sum('amount');
 
         return $accumulated;
     }
@@ -48,8 +47,18 @@ class AccountMovement extends Model
     {   
         $instance = new static;
 
-        $accumulated = $instance::where('id_courier', $id_courier)->where('type', $instance::CONCEPT_PAYMENT_TO_COURIER)->sum('amount');
+        $accumulated = $instance::where('id_courier', $id_courier)->where('concept', $instance::CONCEPT_PAYMENT_TO_COURIER)->sum('amount');
 
         return $accumulated;
+    }
+
+    public function scopeTypeToUrbo($query)
+    {
+        return $query->where('concept', $this::CONCEPT_PAYMENT_TO_URBO);
+    }
+
+    public function scopeTypeToCourier($query)
+    {
+        return $query->where('concept', $this::CONCEPT_PAYMENT_TO_COURIER);
     }
 }

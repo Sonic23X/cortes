@@ -100,7 +100,7 @@
                                         <div class="col-sm-2"></div>
                                         <div id="noTerminal" class="col-sm-6">${{ $column[3] }}</div>
                                         <div class="col-sm-4">
-                                            <a href="#"><i class="fas fa-info-circle"></i></a></div>
+                                            <a href="{{ url('/resumen/pagosurbo/'.$column[0]  ) }}"><i class="fas fa-info-circle"></i></a></div>
                                     </div>
                                 </td>
                                 <td>
@@ -108,7 +108,7 @@
                                         <div class="col-sm-2"></div>
                                         <div id="noTerminal" class="col-sm-6">${{ $column[4] }}</div>
                                         <div class="col-sm-4">
-                                            <a href="#"><i class="fas fa-info-circle"></i></a></div>
+                                            <a href="{{ url('/resumen/pagosrepartido/'.$column[0]  ) }}"><i class="fas fa-info-circle"></i></a></div>
                                     </div>
                                 </td>
                                 <td>
