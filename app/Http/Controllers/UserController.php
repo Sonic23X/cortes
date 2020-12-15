@@ -125,12 +125,18 @@ class UserController extends Controller
             'id' => ['required'],
         ]);
         
-        $data = 
-        [
+        // Validar que la terminal no esté en uso
+        if( User::where('terminal', $request->get('terminal'))->first() != null ) {
+            return response(['message' => 'La terminal ya está en uso', 'status' => 400], 200);
+        }
+
+        $data = [
             'terminal' => ($request->get('terminal') == 'off') ? null : $request->get('terminal') 
-        ];      
+        ];     
 
         User::where('id', $request->get('id'))->update($data);
+
+        return response(['message' => '¡Terminal cambiada con exito!', 'status' => 200], 200);
     }
 
     public function setStatus(Request $request)
@@ -146,5 +152,7 @@ class UserController extends Controller
         ];      
 
         User::where('id', $request->get('id'))->update($data);
+
+        return response(['message' => '¡Status actualizado!'], 200);
     }
 }

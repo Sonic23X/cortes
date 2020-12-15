@@ -28,8 +28,8 @@ Auth::routes();
 Route::get('/inicio', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::resource('/usuarios', UserController::class);
-Route::put('/usuarios/updateStatus', [UserController::class, 'setStatus']);
-Route::put('/usuarios/updateTerminal', [UserController::class, 'setTerminal']);
+Route::post('/usuarios/updateStatus', [UserController::class, 'setStatus']);
+Route::post('/usuarios/updateTerminal', [UserController::class, 'setTerminal']);
 
 Route::resource('/flujo', MonetaryFlowController::class);
 
