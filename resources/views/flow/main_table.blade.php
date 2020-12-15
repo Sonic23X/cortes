@@ -68,7 +68,7 @@
                                                                 <div class="input-group-prepend">
                                                                     <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                                                 </div>
-                                                                <input type="date" class="form-control" data-inputmask-alias="datetime"
+                                                                <input id="min" class="date form-control" data-inputmask-alias="datetime"
                                                                         data-inputmask-inputformat="dd/mm/yyyy" data-mask>
                                                             </div>
                                                         </div>
@@ -86,7 +86,7 @@
                                                                 <div class="input-group-prepend">
                                                                     <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                                                 </div>
-                                                                <input type="date" class="form-control" data-inputmask-alias="datetime"
+                                                                <input type="max" class="date form-control" data-inputmask-alias="datetime"
                                                                         data-inputmask-inputformat="dd/mm/yyyy" data-mask>
                                                             </div>
                                                         </div>
@@ -171,6 +171,7 @@
 
 @section('script')
 
+
     <script type="text/javascript">
         $(document).ready(function () 
         {
@@ -187,6 +188,31 @@
             .container()
             .appendTo('#tablaUsuarios_wrapper .col-md-6:eq(0)');
 
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $.fn.dataTable.ext.search.push(
+                function (settings, data, dataIndex) {
+                    var min = $('#min').datepicker('getDate');
+                    var max = $('#max').datepicker('getDate');
+                    var startDate = new Date(data[4]);
+                    if (min == null && max == null) return true;
+                    if (min == null && startDate <= max) return true;
+                    if (max == null && startDate >= min) return true;
+                    if (startDate <= max && startDate >= min) return true;
+                    return false;
+                }
+            );
+
+            $('#min').datepicker({ onSelect: function () { table.draw(); }, changeMonth: true, changeYear: true });
+            $('#max').datepicker({ onSelect: function () { table.draw(); }, changeMonth: true, changeYear: true });
+            var table = $('#example').DataTable();
+
+            // Event listener to the two range filtering inputs to redraw on input
+            $('#min, #max').change(function () {
+                table.draw();
+            });
         });
     </script>
 

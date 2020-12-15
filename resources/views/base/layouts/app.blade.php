@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="{{ asset('css/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/select2/css/select2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.css') }}">
 </head>
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
@@ -140,6 +141,8 @@
     <script src="{{ asset('js/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
     <script src="{{ asset('js/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
     <script src="{{ asset('js/select2/js/select2.full.min.js') }}"></script>
+    <script src="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/bootstrap- 
+    datepicker/1.9.0/js/bootstrap-datepicker.min.js') }}"></script>
      
     @yield('script')
 
