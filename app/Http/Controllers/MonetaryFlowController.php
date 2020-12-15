@@ -17,15 +17,37 @@ class MonetaryFlowController extends Controller
      */
     public function index()
     {
-        // TO-DO: Habilitar filtro por fecha
         $movements = AccountMovement::all();
+
+        $tableColumns = $movements->map(function($movement) {
+
+            $concept = Concept::find($movement->concept);
+            $account = Account::find($movement->id_account);
+            $charge = '-';
+            $payment = '-';
+
+            if($movement->type == AccountMovement::TYPE_CHARGE)
+                $charge = '$' . $movement->amount;
+            if($movement->type == AccountMovement::TYPE_PAYMENT)
+                $payment = '$' . $movement->amount;
+
+            return [
+                $concept->concept,
+                $movement->details,
+                $account->name,
+                $movement->date,
+                $charge,
+                $payment,
+                $movement->balance,
+            ];
+        });
 
         $view_data = 
         [
             'title' => 'Flujo financiero',
             // Custom data of view
             'accounts' => Account::all(),
-            'movements' => $movements,
+            'movements' => $tableColumns,
         ];
         return view( 'flow.main_table', $view_data );
     }
@@ -173,7 +195,42 @@ class MonetaryFlowController extends Controller
      */
     public function destroy($id)
     {
-        //
+        
+    }
+
+    public function dateFilterTable(Request $request)
+    {
+        $request->validate([
+            'fechaInicio' => [],
+            'fechaFin' => [],
+        ]);
+
+        $movements = null;
+
+        if ($request->get('fechaInicio') != null && $request->get('fechaFin') == null ) 
+        {
+            $movements = AccountMovement::where('date', '>=', $request->get('fechaInicio'))->get();
+
+            return response(['movements' => $movements], 200);
+        }
+        else if ($request->get('fechaInicio') == null && $request->get('fechaFin') != null )
+        {
+            $movements = AccountMovement::where('date', '<=', $request->get('fechaFin'))->get();
+
+            return response(['movements' => $movements], 200);
+        }
+        else if ($request->get('fechaInicio') != null && $request->get('fechaFin') != null )
+        {
+            $movements = AccountMovement::where('date', '>=', $request->get('fechaInicio'))
+                                        ->where('date', '<=', $request->get('fechaFin'))
+                                        ->get();
+
+            return response(['movements' => $movements], 200);
+        }
+        else if ($request->get('fechaInicio') == null && $request->get('fechaFin') == null )
+        {
+            return response(['movements' => AccountMovement::all()], 200);
+        }
     }
 
 }
