@@ -19,62 +19,37 @@
                         <div class="card-header">
                             <div class="row">
                                 <div class="col-sm-8">
-                                    <h3 class="card-title">Detalle Pedidos Cobrados de $repartidor </h3>
+                                    <h3 class="card-title">Detalle Pedidos Cobrados de {{ $courier->name }} {{ $courier->last_name }} </h3>
                                 </div>
-                                <div class="col-sm-4"> <a id="registerUser" href="#" class="btn btn-primary btn-sm float-right"
-                                                          onclick="registrarUsuario()">Registrar</a></div>
                             </div>
                         </div>
                         <div class="card-body">
-                            <table id="tablaPagosCobradosRepartidor" class="table table-bordered table-striped">
+                            <table id="tablaPagosCobradosRepartidor" class="table table-bordered table-striped text-center">
                                 <thead>
-                                <tr style="text-align: center;">
-                                    <th>Fecha</th>
-                                    <th>No. Pedido</th>
-                                    <th>Negocio</th>
-                                    <th>Monto</th>
-                                    <th>Tipo de Pago</th>
-                                </tr>
+                                    <tr>
+                                        <th>Fecha</th>
+                                        <th>No. Pedido</th>
+                                        <th>Negocio</th>
+                                        <th>Monto</th>
+                                    </tr>
                                 </thead>
-                                <tbody style="text-align: center;">
-                                <tr>
-                                    <td>14/11/2020</td>
-                                    <td>2548</td>
-                                    <td>Oiishi Roll</td>
-                                    <td>$145.00</td>
-                                    <td>Efectivo</td>
-                                </tr>
-                                <tr>
-                                    <td>14/11/2020</td>
-                                    <td>2548</td>
-                                    <td>Oiishi Roll</td>
-                                    <td>$145.00</td>
-                                    <td>Efectivo</td>
-                                </tr>
-                                <tr>
-                                    <td>14/11/2020</td>
-                                    <td>2548</td>
-                                    <td>Oiishi Roll</td>
-                                    <td>$145.00</td>
-                                    <td>Efectivo</td>
-                                </tr>
-                                <tr>
-                                    <td>14/11/2020</td>
-                                    <td>2548</td>
-                                    <td>Oiishi Roll</td>
-                                    <td>$145.00</td>
-                                    <td>Efectivo</td>
-                                </tr>
-
+                                <tbody>
+                                    @foreach($columns as $column)
+                                    <tr>
+                                        <td>{{ $column[0] }}</td>
+                                        <td>{{ $column[1] }}</td>
+                                        <td>{{ $column[2] }}</td>
+                                        <td>${{ $column[3] }}</td>
+                                    </tr>
+                                    @endforeach
                                 </tbody>
                                 <tfoot>
-                                <tr style="text-align: center;">
-                                    <th>Fecha</th>
-                                    <th>No. Pedido</th>
-                                    <th>Negocio</th>
-                                    <th>Monto</th>
-                                    <th>Tipo de Pago</th>
-                                </tr>
+                                    <tr>
+                                        <th>Fecha</th>
+                                        <th>No. Pedido</th>
+                                        <th>Negocio</th>
+                                        <th>Monto</th>
+                                    </tr>
                                 </tfoot>
                             </table>
                         </div>

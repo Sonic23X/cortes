@@ -35,6 +35,11 @@ Route::resource('/flujo', MonetaryFlowController::class);
 
 Route::resource('/resumen', ResumeController::class);
 Route::post('/corte', [ResumeController::class, 'nuevoCorte']);
+Route::get('/resumen/pedidoscobrados/{id}', [ResumeController::class, 'detallesPagosCobrados']);
+Route::get('/resumen/pagosurbo/{id}', [ResumeController::class, 'detallesPagosCobrados']);
+Route::get('/resumen/pagosrepartido/{id}', [ResumeController::class, 'detallesPagosCobrados']);
+Route::get('/resumen/cortes/{id}', [ResumeController::class, 'detallesCortes']);
+
 
 Route::resource('/pagos', ChargeController::class);
 

@@ -66,7 +66,7 @@
                         </div>
                         <div class="col-sm-2">
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#corteModal">
-                                Crear corre
+                                Crear corte
                             </button>
                         </div>
                     </div>
@@ -92,7 +92,7 @@
                                         <div class="col-sm-2"></div>
                                         <div id="noTerminal" class="col-sm-6">${{ $column[2] }}</div>
                                         <div class="col-sm-4">
-                                            <a href="#"><i class="fas fa-info-circle"></i></a></div>
+                                            <a href="{{ url('/resumen/pedidoscobrados/'.$column[0]  ) }}"><i class="fas fa-info-circle"></i></a></div>
                                     </div>
                                 </td>
                                 <td>
@@ -116,7 +116,7 @@
                                         <div class="col-sm-2"></div>
                                         <div id="noTerminal" class="col-sm-6">${{ $column[5] }}</div>
                                         <div class="col-sm-4">
-                                            <a href="#"><i class="fas fa-info-circle"></i></a></div>
+                                            <a href="{{ url('/resumen/cortes/'.$column[0]  ) }}"><i class="fas fa-info-circle"></i></a></div>
                                     </div>
                                 </td>
                                 <td>${{ $column[6] }}</td>

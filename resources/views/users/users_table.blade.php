@@ -42,19 +42,22 @@
                                 <tbody>
                                     @foreach ($couriers as $courier)
                                         <tr>
-                                            <td>{{ $courier->name }} {{ $courier->last_name }} </td>
+                                            <td>
+                                                {{ $courier->name }} {{ $courier->last_name }} 
+                                                <input type="hidden" id="courier_{{ $courier->id }}" value="{{ $courier->id }}">
+                                            </td>
                                             <td>{{ $courier->email }}</td>
                                             <td>
                                                 <div class="custom-control custom-switch">
                                                     <input id="switchStatus" type="checkbox" class="custom-control-input"
-                                                        onclick="statusChange()" @if($courier->status == 1) checked @endif>
+                                                        @if($courier->status == 1) checked @endif>
                                                     <label id="labelStatus" class="custom-control-label" for="switchStatus">Activo</label>
                                                 </div>
                                             </td>
                                             <td>
                                                 <div class="custom-control custom-switch">
                                                     <input type="checkbox" class="custom-control-input" id="hasTerminal"
-                                                        onclick="terminalChange()" @if($courier->terminal != null) checked @endif>
+                                                        @if($courier->terminal != null) checked @endif>
                                                     <label class="custom-control-label" for="hasTerminal" id="hasTerminalLabel">Sí</label>
                                                 </div>
                                             </td>

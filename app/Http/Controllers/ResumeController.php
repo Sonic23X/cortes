@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Place;
 use App\Models\History;
 use App\Models\Payment;
 use App\Models\AccountMovement;
@@ -140,5 +141,105 @@ class ResumeController extends Controller
         History::create($data);
 
         return response(['message' => '¡Corte registrado!'], 200);
+    }
+
+    public function detallesPagosCobrados($id)
+    {
+        $courier = User::find($id);
+
+        $pedidos_cobrados = Payment::where('id_courier', $id)->get();
+
+        $tableColumns = $pedidos_cobrados->map(function($pedido) 
+        {
+            $negocio = Place::find($pedido->id_place);
+
+            return [
+                $pedido->date,
+                $pedido->id_order,
+                $negocio->name,
+                $pedido->amount,
+            ];
+        });
+
+        $view_data = 
+        [
+            'title' => 'Usuarios',
+            'courier' => $courier,
+            'columns' => $tableColumns,
+        ];
+
+        return view( 'summary/summary_payment_courier_detail', $view_data );
+    }
+
+    public function detallesPagosUrbo($id)
+    {
+        $courier = User::find($id);
+
+        $pedidos_cobrados = Payment::where('id_courier', $id)->get();
+
+        $tableColumns = $pedidos_cobrados->map(function($pedido) 
+        {
+            $negocio = Place::find($pedido->id_place);
+
+            return [
+                $pedido->date,
+                $pedido->id_order,
+                $negocio->name,
+                $pedido->amount,
+            ];
+        });
+
+        $view_data = 
+        [
+            'title' => 'Usuarios',
+            'courier' => $courier,
+            'columns' => $tableColumns,
+        ];
+
+        return view( 'summary/summary_payment_courier_detail', $view_data );
+    }
+
+    public function detallesPagosRepartidor($id)
+    {
+        $courier = User::find($id);
+
+        $pedidos_cobrados = Payment::where('id_courier', $id)->get();
+
+        $tableColumns = $pedidos_cobrados->map(function($pedido) 
+        {
+            $negocio = Place::find($pedido->id_place);
+
+            return [
+                $pedido->date,
+                $pedido->id_order,
+                $negocio->name,
+                $pedido->amount,
+            ];
+        });
+
+        $view_data = 
+        [
+            'title' => 'Usuarios',
+            'courier' => $courier,
+            'columns' => $tableColumns,
+        ];
+
+        return view( 'summary/summary_payment_courier_detail', $view_data );
+    }
+
+    public function detallesCortes($id)
+    {
+        $courier = User::find($id);
+
+        $cortes = History::where('id_courier', $id)->get();
+
+        $view_data = 
+        [
+            'title' => 'Usuarios',
+            'courier' => $courier,
+            'cortes' => $cortes,
+        ];
+
+        return view( 'summary/summary_cuts_detail', $view_data );
     }
 }

@@ -19,39 +19,31 @@
                         <div class="card-header">
                             <div class="row">
                                 <div class="col-sm-8">
-                                    <h3 class="card-title">Detalle de Cortes de $repartidor </h3>
+                                    <h3 class="card-title">Detalle Pedidos Cobrados de {{ $courier->name }} {{ $courier->last_name }} </h3>
                                 </div>
-                                <div class="col-sm-4"> <a id="registerUser" href="#" class="btn btn-primary btn-sm float-right"
-                                                          onclick="registrarUsuario()">Registrar</a></div>
                             </div>
                         </div>
                         <div class="card-body">
                             <table id="tablaDetallesCorte" class="table table-bordered table-striped">
                                 <thead>
-                                <tr style="text-align: center;">
-                                    <th>Nombre del corte</th>
-                                    <th>Monto</th>
-                                </tr>
+                                    <tr style="text-align: center;">
+                                        <th>Nombre del corte</th>
+                                        <th>Monto</th>
+                                    </tr>
                                 </thead>
                                 <tbody style="text-align: center;">
-                                <tr>
-                                    <td>Del 1 al 30 de Noviembre</td>
-                                    <td>$145.00</td>
-                                </tr>
-                                <tr>
-                                    <td>Del 15 al 30 de Diciembre</td>
-                                    <td>$145.00</td>
-                                </tr>
-                                <tr>
-                                    <td>Del 2 al 7 de Diciembre</td>
-                                    <td>$145.00</td>
-                                </tr>
+                                    @foreach($cortes as $corte)
+                                    <tr>
+                                        <td>{{ $corte->name }}</td>
+                                        <td>${{ $corte->amount }}</td>
+                                    </tr>
+                                    @endforeach
                                 </tbody>
                                 <tfoot>
-                                <tr style="text-align: center;">
-                                    <th>Corte</th>
-                                    <th>Monto</th>>
-                                </tr>
+                                    <tr style="text-align: center;">
+                                        <th>Corte</th>
+                                        <th>Monto</th>>
+                                    </tr>
                                 </tfoot>
                             </table>
                         </div>
