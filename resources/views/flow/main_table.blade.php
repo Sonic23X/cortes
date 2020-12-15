@@ -207,7 +207,7 @@
 
             $('#min').datepicker({ onSelect: function () { table.draw(); }, changeMonth: true, changeYear: true });
             $('#max').datepicker({ onSelect: function () { table.draw(); }, changeMonth: true, changeYear: true });
-            var table = $('#example').DataTable();
+            var table = $('#tablaUsuarios').DataTable();
 
             // Event listener to the two range filtering inputs to redraw on input
             $('#min, #max').change(function () {
