@@ -204,33 +204,56 @@ class MonetaryFlowController extends Controller
             'fechaInicio' => [],
             'fechaFin' => [],
         ]);
-
+        
         $movements = null;
 
-        if ($request->get('fechaInicio') != null && $request->get('fechaFin') == null ) 
+        if ($request->get('fechaInicio') != null && $request->get('fechaFin') == null )
         {
-            $movements = AccountMovement::where('date', '>=', $request->get('fechaInicio'))->get();
-
-            return response(['movements' => $movements], 200);
-        }
-        else if ($request->get('fechaInicio') == null && $request->get('fechaFin') != null )
+            $fechaInicio = \Carbon\Carbon::createFromFormat('Y-m-d', $request->get('fechaInicio') );
+            $movements = AccountMovement::where('date', '>=', $fechaInicio)->get();
+        }            
+        else if ($request->get('fechaInicio') == null && $request->get('fechaFin') != null )        
         {
-            $movements = AccountMovement::where('date', '<=', $request->get('fechaFin'))->get();
-
-            return response(['movements' => $movements], 200);
+            $fechaFin = \Carbon\Carbon::createFromFormat('Y-m-d', $request->get('fechaFin') );
+            $movements = AccountMovement::where('date', '<=', $fechaFin)->get();
         }
         else if ($request->get('fechaInicio') != null && $request->get('fechaFin') != null )
         {
-            $movements = AccountMovement::where('date', '>=', $request->get('fechaInicio'))
-                                        ->where('date', '<=', $request->get('fechaFin'))
+            $fechaInicio = \Carbon\Carbon::createFromFormat('Y-m-d', $request->get('fechaInicio') );
+            $fechaFin = \Carbon\Carbon::createFromFormat('Y-m-d', $request->get('fechaFin') );
+            
+            $movements = AccountMovement::where('date', '>=', $fechaInicio)
+                                        ->where('date', '<=', $fechaFin)
                                         ->get();
-
-            return response(['movements' => $movements], 200);
         }
         else if ($request->get('fechaInicio') == null && $request->get('fechaFin') == null )
         {
-            return response(['movements' => AccountMovement::all()], 200);
-        }
+            $movements = AccountMovement::all();
+        }       
+        $tableColumns = $movements->map(function($movement) {
+
+            $concept = Concept::find($movement->concept);
+            $account = Account::find($movement->id_account);
+            $charge = '-';
+            $payment = '-';
+
+            if($movement->type == AccountMovement::TYPE_CHARGE)
+                $charge = '$' . $movement->amount;
+            if($movement->type == AccountMovement::TYPE_PAYMENT)
+                $payment = '$' . $movement->amount;
+
+            return [
+                $concept->concept,
+                $movement->details,
+                $account->name,
+                $movement->date,
+                $charge,
+                $payment,
+                $movement->balance,
+            ];
+        });
+
+        return response(['movements' => $tableColumns], 200);
     }
 
 }

@@ -68,8 +68,8 @@
                                                                 <div class="input-group-prepend">
                                                                     <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                                                 </div>
-                                                                <input type="date" class="form-control" data-inputmask-alias="datetime"
-                                                                        data-inputmask-inputformat="dd/mm/yyyy" data-mask>
+                                                                <input type="date" class="form-control filterDate" data-inputmask-alias="datetime"
+                                                                        data-inputmask-inputformat="yyyy/mm/dd" data-mask id="fechaInicio">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -86,8 +86,8 @@
                                                                 <div class="input-group-prepend">
                                                                     <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                                                 </div>
-                                                                <input type="date" class="form-control" data-inputmask-alias="datetime"
-                                                                        data-inputmask-inputformat="dd/mm/yyyy" data-mask>
+                                                                <input type="date" class="form-control filterDate" data-inputmask-alias="datetime"
+                                                                        data-inputmask-inputformat="yyyy/mm/dd" data-mask id="fechaFin">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -113,53 +113,19 @@
                                             <th>Saldo</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody id="flowTableBody">
                                     @foreach ($movements as $movement)
                                         <tr>
-                                        @switch($movement->concept)
-                                            @case(1)
-                                                <td>Pago a Repartidor</td>
-                                                @break
-                                            @case(2)
-                                                <td>Pago a Urbo</td>
-                                                @break
-                                            @case(3)
-                                                <td>Cobrado por el Repartidor</td>
-                                                @break
-                                            @case(4)
-                                                <td>Saldo Inicial</td>
-                                                @break
-                                        @endswitch
-                                            <td>{{ $movement->details }}</td>
-                                            <td>{{ $movement->id_account }}</td>
-                                            <td>{{ $movement->date }}</td>
-
-                                        @switch($movement->type)
-                                            @case('cargo')
-                                                <td>${{ $movement->amount }}</td>
-                                                <td>-</td>
-                                                <td>${{ $movement->balance }}</td>
-                                                @break
-                                            @case('abono')
-                                                <td>-</td>
-                                                <td>${{ $movement->amount }}</td>
-                                                <td>${{ $movement->balance }}</td>
-                                                @break
-                                        @endswitch
+                                            <td>{{ $movement[0] }}</td>
+                                            <td>{{ $movement[1] }}</td>
+                                            <td>{{ $movement[2] }}</td>
+                                            <td>{{ $movement[3] }}</td>
+                                            <td>{{ $movement[4] }}</td>
+                                            <td>{{ $movement[5] }}</td>
+                                            <td>${{ $movement[6] }}</td>
                                         </tr>
                                     @endforeach
                                     </tbody>
-                                    <tfoot>
-                                        <tr style="text-align: center;">
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
-                                            <th>TOTAL</th>
-                                            <th>$1500.00</th>
-                                        </tr>
-                                    </tfoot>
                                 </table>
                             </div>
                         </div>
@@ -172,22 +138,92 @@
 @section('script')
 
     <script type="text/javascript">
+        
         $(document).ready(function () 
         {
-            
-            $('#tablaUsuarios').DataTable(
+            var dtFlow = null;
+
+            dtFlow = $('#tablaUsuarios').DataTable(
             {
                 'responsive': true,
                 'lengthChange': false,
                 'autoWidth': false,
                 'responsive': true,
                 'buttons': ['excel', 'pdf', 'colvis']
-            })
+            });
+            
+            dtFlow
             .buttons()
             .container()
             .appendTo('#tablaUsuarios_wrapper .col-md-6:eq(0)');
 
+            $('.filterDate').on('change', function () {
+                
+                let fechaI = $('#fechaInicio').val();
+                let fechaF = $('#fechaFin').val();
+
+                let data = 
+                {
+                    fechaInicio: fechaI,
+                    fechaFin: fechaF,
+                };
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+
+                $.ajax({
+                    url: '{{ url("/flujo/filtro") }}',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: data,
+                })
+                .done(response => {
+                    if (dtFlow != null)
+                        dtFlow.destroy();
+                    
+                    $('#flowTableBody').html('');
+
+                    let movimientos = response.movements;
+
+                    movimientos.forEach(movimiento => {
+                        let plantilla = 
+                        `
+                            <tr>
+                                <td>${ movimiento[0] }</td>
+                                <td>${ movimiento[1] }</td>
+                                <td>${ movimiento[2] }</td>
+                                <td>${ movimiento[3] }</td>
+                                <td>${ movimiento[4] }</td>
+                                <td>${ movimiento[5] }</td>
+                                <td>${ movimiento[6] }</td>
+                            </tr>
+                        `;
+
+                        $('#flowTableBody').append(plantilla);
+                    });
+
+                    dtFlow = $('#tablaUsuarios').DataTable(
+                    {
+                        'responsive': true,
+                        'lengthChange': false,
+                        'autoWidth': false,
+                        'responsive': true,
+                        'buttons': ['excel', 'pdf', 'colvis']
+                    });
+
+                    dtFlow
+                    .buttons()
+                    .container()
+                    .appendTo('#tablaUsuarios_wrapper .col-md-6:eq(0)');
+                
+                });
+            });
+            
         });
+
     </script>
 
 @endsection
