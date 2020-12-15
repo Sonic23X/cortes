@@ -219,4 +219,63 @@ class ResumeController extends Controller
 
         return view( 'summary/summary_cuts_detail', $view_data );
     }
+
+    public function dateFilterTable(Request $request)
+    {
+        $request->validate([
+            'fechaInicio' => [],
+            'fechaFin' => [],
+        ]);
+        
+        $movements = null;
+
+        if ($request->get('fechaInicio') != null && $request->get('fechaFin') == null )
+        {
+            $fechaInicio = \Carbon\Carbon::createFromFormat('Y-m-d', $request->get('fechaInicio') );
+            $movements = AccountMovement::where('date', '>=', $fechaInicio)->get();
+        }            
+        else if ($request->get('fechaInicio') == null && $request->get('fechaFin') != null )        
+        {
+            $fechaFin = \Carbon\Carbon::createFromFormat('Y-m-d', $request->get('fechaFin') );
+            $movements = AccountMovement::where('date', '<=', $fechaFin)->get();
+        }
+        else if ($request->get('fechaInicio') != null && $request->get('fechaFin') != null )
+        {
+            $fechaInicio = \Carbon\Carbon::createFromFormat('Y-m-d', $request->get('fechaInicio') );
+            $fechaFin = \Carbon\Carbon::createFromFormat('Y-m-d', $request->get('fechaFin') );
+            
+            $movements = AccountMovement::where('date', '>=', $fechaInicio)
+                                        ->where('date', '<=', $fechaFin)
+                                        ->get();
+        }
+        else if ($request->get('fechaInicio') == null && $request->get('fechaFin') == null )
+        {
+            $movements = AccountMovement::all();
+        }       
+
+        $tableColumns = $couriers->map(function($courier) {
+            
+            $pedidos_cobrados = Payment::getAmountPerCourier($courier->id);
+            $pagos_a_urbo = AccountMovement::paymentsToUrbo($courier->id);
+            $pagos_a_repartidor = AccountMovement::paymentsToCourier($courier->id);
+
+            $cortes = History::historyPerCourier($courier->id);
+
+            $saldo = $pedidos_cobrados + $cortes - $pagos_a_urbo - $pagos_a_repartidor;
+
+            return [
+                $courier->id,
+                $courier->name . ' ' . $courier->last_name,
+                $pedidos_cobrados,
+                $pagos_a_urbo,
+                $pagos_a_repartidor,
+                $cortes,
+                $saldo,
+            ];
+        });
+
+        return response(['movements' => $tableColumns], 200);
+    }
+
+
 }

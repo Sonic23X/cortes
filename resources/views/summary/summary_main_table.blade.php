@@ -19,184 +19,126 @@
                         <div class="card-body">
                             <p class="lead mb-0">
                                 <div class="row">
-
                                     <div class="col-sm-10">
-                            <p class="lead mb-0">
-                            <div class="row">
-                                <div class="col-sm-2">
-                                    <h5 style="font-weight: bold;">Periodo</h5>
-                                </div>
-                                <div class="col-sm">
-                                    <div class="row">
-                                        <div class="col-sm-2">
-                                            <h5 style="font-weight: bold;">De:</h5>
-                                        </div>
-                                        <div class="col-sm-8">
-                                            <div class="form-group">
-                                                <div class="input-group">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                        <p class="lead mb-0">
+                                            <div class="row">
+                                                <div class="col-sm-2">
+                                                    <h5 style="font-weight: bold;">Periodo</h5>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <div class="row">
+                                                        <div class="col-sm-2">
+                                                            <h5 style="font-weight: bold;">De:</h5>
+                                                        </div>
+                                                        <div class="col-sm-8">
+                                                            <div class="form-group">
+                                                                <div class="input-group">
+                                                                    <div class="input-group-prepend">
+                                                                        <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                                                    </div>
+                                                                    <input type="date" class="form-control filterDate" data-inputmask-alias="datetime"
+                                                                        data-inputmask-inputformat="yyyy/mm/dd" data-mask id="fechaInicio">
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                    <input type="date" class="form-control" data-inputmask-alias="datetime"
-                                                           data-inputmask-inputformat="dd/mm/yyyy" data-mask>
                                                 </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm">
-                                    <div class="row">
-                                        <div class="col-sm-2">
-                                            <h5 style="font-weight: bold;">A:</h5>
-                                        </div>
-                                        <div class="col-sm-8">
-                                            <div class="form-group">
-                                                <div class="input-group">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                                <div class="col-sm-4">
+                                                    <div class="row">
+                                                        <div class="col-sm-2">
+                                                            <h5 style="font-weight: bold;">A:</h5>
+                                                        </div>
+                                                        <div class="col-sm-8">
+                                                            <div class="form-group">
+                                                                <div class="input-group">
+                                                                    <div class="input-group-prepend">
+                                                                        <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                                                    </div>
+                                                                    <input type="date" class="form-control filterDate" data-inputmask-alias="datetime"
+                                                                        data-inputmask-inputformat="yyyy/mm/dd" data-mask id="fechaFin">
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                    <input type="date" class="form-control" data-inputmask-alias="datetime"
-                                                           data-inputmask-inputformat="dd/mm/yyyy" data-mask>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <button class="btn btn-secondary" id="btnLimpiar">
+                                                        Limpiar 
+                                                    </button>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </p>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-2">
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#corteModal">
-                                Crear corte
-                            </button>
-                        </div>
-                    </div>
-                    </p>
-
-                    <table id="tablaResumen" class="table table-bordered table-striped">
-                        <thead>
-                            <tr style="text-align: center;">
-                                <th>Repartidor</th>
-                                <th>Pedidos Cobrados</th>
-                                <th>Pagos Hechos a Urbo</th>
-                                <th>Pagos al Repartidor</th>
-                                <th>Cortes</th>
-                                <th>Saldo Total</th>
-                            </tr>
-                        </thead>
-                        <tbody style="text-align: center;">
-                            @foreach($columns as $column)
-                            <tr>
-                                <td>{{ $column[1] }}</td>
-                                <td>
-                                    <div class="row">
-                                        <div class="col-sm-2"></div>
-                                        <div id="noTerminal" class="col-sm-6">${{ $column[2] }}</div>
-                                        <div class="col-sm-4">
-                                            <a href="{{ url('/resumen/pedidoscobrados/'.$column[0]  ) }}"><i class="fas fa-info-circle"></i></a></div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="row">
-                                        <div class="col-sm-2"></div>
-                                        <div id="noTerminal" class="col-sm-6">${{ $column[3] }}</div>
-                                        <div class="col-sm-4">
-                                            <a href="{{ url('/resumen/pagosurbo/'.$column[0]  ) }}"><i class="fas fa-info-circle"></i></a></div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="row">
-                                        <div class="col-sm-2"></div>
-                                        <div id="noTerminal" class="col-sm-6">${{ $column[4] }}</div>
-                                        <div class="col-sm-4">
-                                            <a href="{{ url('/resumen/pagosrepartido/'.$column[0]  ) }}"><i class="fas fa-info-circle"></i></a></div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="row">
-                                        <div class="col-sm-2"></div>
-                                        <div id="noTerminal" class="col-sm-6">${{ $column[5] }}</div>
-                                        <div class="col-sm-4">
-                                            <a href="{{ url('/resumen/cortes/'.$column[0]  ) }}"><i class="fas fa-info-circle"></i></a></div>
-                                    </div>
-                                </td>
-                                <td>${{ $column[6] }}</td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                        <tfoot>
-                            <tr style="text-align: center;">
-                                <th>Repartidor</th>
-                                <th>Pedidos Cobrados</th>
-                                <th>Pagos Hechos a Urbo</th>
-                                <th>Pagos al Repartidor</th>
-                                <th>Cortes</th>
-                                <th>Saldo Total</th>
-                            </tr>
-                        </tfoot>
-                    </table>
-                </div>
-            </div>
-        </div>
-        </div>
-
-        <!--MODAL-->
-        <div class="modal fade" id="corteModal" tabindex="-1" role="dialog" aria-labelledby="corteModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="corteModalLabel">Registrar Corte</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="card-body">
-                            <form method="POST" id="corteForm">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label>Nombre del Corte</label>
-                                            <div class="input-group mb-3">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text"><i class="fas fa-cut"></i></span>
-                                                </div>
-                                                <input type="text" class="form-control" placeholder="Nombre del corte" id="nombreCorte" name="nombreCorte" required>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label>Repartidor</label>
-                                            <div class="input-group mb-3">
-                                                <select name="repartidor" id="repartidor" class="custom-select select2">
-                                                @foreach ($couriers as $courier)
-                                                    <option value="{{ $courier[0] }}">{{ $courier[1] }}</option>                                    
-                                                @endforeach
-                                                </select>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label>Cantidad Total de Corte</label>
-                                            <div class="input-group">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text">$</span>
-                                                </div>
-                                                <input type="number" class="form-control" name="montoCorte" id="montoCorte" required>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row mt-4">
-                                    <div class="btn-group w-100" role="group">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                                            Cancelar
-                                        </button>
-                                        <button type="submit" class="btn btn-success">
-                                            Guardar
+                                    <div class="col-sm-2">
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#corteModal">
+                                            Crear corte
                                         </button>
                                     </div>
                                 </div>
-                            </form>
+                            </p>
+
+                            <table id="tablaResumen" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr style="text-align: center;">
+                                        <th>Repartidor</th>
+                                        <th>Pedidos Cobrados</th>
+                                        <th>Pagos Hechos a Urbo</th>
+                                        <th>Pagos al Repartidor</th>
+                                        <th>Cortes</th>
+                                        <th>Saldo Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody style="text-align: center;">
+                                    @foreach($columns as $column)
+                                    <tr>
+                                        <td>{{ $column[1] }}</td>
+                                        <td>
+                                            <div class="row">
+                                                <div class="col-sm-2"></div>
+                                                <div id="noTerminal" class="col-sm-6">${{ $column[2] }}</div>
+                                                <div class="col-sm-4">
+                                                    <a href="{{ url('/resumen/pedidoscobrados/'.$column[0]  ) }}"><i class="fas fa-info-circle"></i></a></div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="row">
+                                                <div class="col-sm-2"></div>
+                                                <div id="noTerminal" class="col-sm-6">${{ $column[3] }}</div>
+                                                <div class="col-sm-4">
+                                                    <a href="{{ url('/resumen/pagosurbo/'.$column[0]  ) }}"><i class="fas fa-info-circle"></i></a></div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="row">
+                                                <div class="col-sm-2"></div>
+                                                <div id="noTerminal" class="col-sm-6">${{ $column[4] }}</div>
+                                                <div class="col-sm-4">
+                                                    <a href="{{ url('/resumen/pagosrepartido/'.$column[0]  ) }}"><i class="fas fa-info-circle"></i></a></div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="row">
+                                                <div class="col-sm-2"></div>
+                                                <div id="noTerminal" class="col-sm-6">${{ $column[5] }}</div>
+                                                <div class="col-sm-4">
+                                                    <a href="{{ url('/resumen/cortes/'.$column[0]  ) }}"><i class="fas fa-info-circle"></i></a></div>
+                                            </div>
+                                        </td>
+                                        <td>${{ $column[6] }}</td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                                <tfoot>
+                                    <tr style="text-align: center;">
+                                        <th>Repartidor</th>
+                                        <th>Pedidos Cobrados</th>
+                                        <th>Pagos Hechos a Urbo</th>
+                                        <th>Pagos al Repartidor</th>
+                                        <th>Cortes</th>
+                                        <th>Saldo Total</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -204,19 +146,86 @@
         </div>
     </section>
 
+    <div class="modal fade" id="corteModal" tabindex="-1" role="dialog" aria-labelledby="corteModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="corteModalLabel">Registrar Corte</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="card-body">
+                        <form method="POST" id="corteForm">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Nombre del Corte</label>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-cut"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" placeholder="Nombre del corte" id="nombreCorte" name="nombreCorte" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Repartidor</label>
+                                        <div class="input-group mb-3">
+                                            <select name="repartidor" id="repartidor" class="custom-select select2">
+                                            @foreach ($couriers as $courier)
+                                                <option value="{{ $courier[0] }}">{{ $courier[1] }}</option>                                    
+                                            @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Cantidad Total de Corte</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">$</span>
+                                            </div>
+                                            <input type="number" class="form-control" name="montoCorte" id="montoCorte" required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-4">
+                                <div class="btn-group w-100" role="group">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                        Cancelar
+                                    </button>
+                                    <button type="submit" class="btn btn-success">
+                                        Guardar
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
 @section('script')
 
     <script type="text/javascript">
         $(document).ready(function ()
         {
-            $("#tablaResumen").DataTable({
+            dtSummary = null;
+
+            dtSummary = $("#tablaResumen").DataTable({
                 "responsive": true,
                 "lengthChange": false,
                 "autoWidth": false,
                 "responsive": true,
                 "buttons": ['excel', 'pdf', 'colvis']
-            }).buttons().container().appendTo('#tablaResumen_wrapper .col-md-6:eq(0)');
+            })
+            
+            dtSummary.buttons().container().appendTo('#tablaResumen_wrapper .col-md-6:eq(0)');
 
             $('.select2').select2(
             {
@@ -251,6 +260,76 @@
                 });
 
             });
+
+            $('#btnLimpiar').click(event => {
+
+            });
+
+            $('.filterDate').on('change', function () {
+                
+                let fechaI = $('#fechaInicio').val();
+                let fechaF = $('#fechaFin').val();
+
+                let data = 
+                {
+                    fechaInicio: fechaI,
+                    fechaFin: fechaF,
+                };
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+
+                $.ajax({
+                    url: '{{ url("/resumen/filtro") }}',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: data,
+                })
+                .done(response => {
+                    if (dtFlow != null)
+                        dtFlow.destroy();
+                    
+                    $('#flowTableBody').html('');
+
+                    let movimientos = response.movements;
+
+                    movimientos.forEach(movimiento => {
+                        let plantilla = 
+                        `
+                            <tr>
+                                <td>${ movimiento[0] }</td>
+                                <td>${ movimiento[1] }</td>
+                                <td>${ movimiento[2] }</td>
+                                <td>${ movimiento[3] }</td>
+                                <td>${ movimiento[4] }</td>
+                                <td>${ movimiento[5] }</td>
+                                <td>${ movimiento[6] }</td>
+                            </tr>
+                        `;
+
+                        $('#flowTableBody').append(plantilla);
+                    });
+
+                    dtFlow = $('#tablaUsuarios').DataTable(
+                    {
+                        'responsive': true,
+                        'lengthChange': false,
+                        'autoWidth': false,
+                        'responsive': true,
+                        'buttons': ['excel', 'pdf', 'colvis']
+                    });
+
+                    dtFlow
+                    .buttons()
+                    .container()
+                    .appendTo('#tablaUsuarios_wrapper .col-md-6:eq(0)');
+                
+                });
+            });
+
         });
     </script>
 

@@ -40,6 +40,7 @@ Route::get('/resumen/pedidoscobrados/{id}', [ResumeController::class, 'detallesP
 Route::get('/resumen/pagosurbo/{id}', [ResumeController::class, 'detallesPagosUrbo']);
 Route::get('/resumen/pagosrepartido/{id}', [ResumeController::class, 'detallesPagosRepartidor']);
 Route::get('/resumen/cortes/{id}', [ResumeController::class, 'detallesCortes']);
+Route::post('/resumen/filtro', [ResumeController::class, 'dateFilterTable']);
 
 Route::resource('/pagos', ChargeController::class);
 Route::post('/pagos/updatemonto', [ChargeController::class, 'updateMonto']);

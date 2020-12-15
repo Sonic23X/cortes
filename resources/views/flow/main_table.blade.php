@@ -57,7 +57,7 @@
                                             <div class="col-sm-2">
                                                 <h5 style="font-weight: bold;">Periodo</h5>
                                             </div>
-                                            <div class="col-sm">
+                                            <div class="col-sm-4">
                                                 <div class="row">
                                                     <div class="col-sm-2">
                                                         <h5 style="font-weight: bold;">De:</h5>
@@ -75,7 +75,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-sm">
+                                            <div class="col-sm-4">
                                                 <div class="row">
                                                     <div class="col-sm-2">
                                                         <h5 style="font-weight: bold;">A:</h5>
@@ -92,6 +92,11 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <button class="btn btn-secondary" id="btnLimpiar">
+                                                    Limpiar 
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
@@ -222,6 +227,65 @@
                 });
             });
             
+            $('#btnLimpiar').click(event => {
+
+                $('#fechaInicio').val('');
+                $('#fechaFin').val('');
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+
+                $.ajax({
+                    url: '{{ url("/flujo/filtro") }}',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: { },
+                })
+                .done(response => {
+                    if (dtFlow != null)
+                        dtFlow.destroy();
+                    
+                    $('#flowTableBody').html('');
+
+                    let movimientos = response.movements;
+
+                    movimientos.forEach(movimiento => {
+                        let plantilla = 
+                        `
+                            <tr>
+                                <td>${ movimiento[0] }</td>
+                                <td>${ movimiento[1] }</td>
+                                <td>${ movimiento[2] }</td>
+                                <td>${ movimiento[3] }</td>
+                                <td>${ movimiento[4] }</td>
+                                <td>${ movimiento[5] }</td>
+                                <td>${ movimiento[6] }</td>
+                            </tr>
+                        `;
+
+                        $('#flowTableBody').append(plantilla);
+                    });
+
+                    dtFlow = $('#tablaUsuarios').DataTable(
+                    {
+                        'responsive': true,
+                        'lengthChange': false,
+                        'autoWidth': false,
+                        'responsive': true,
+                        'buttons': ['excel', 'pdf', 'colvis']
+                    });
+
+                    dtFlow
+                    .buttons()
+                    .container()
+                    .appendTo('#tablaUsuarios_wrapper .col-md-6:eq(0)');
+                
+                });
+            });
+
         });
 
     </script>
