@@ -48,10 +48,11 @@
                                         <td>
                                             <div class="row">
                                                 <div class="col-sm-4"></div>
-                                                <div id="noTerminal" class="col-sm-4">${{ $payment[4] }}</div>
+                                                <div id="montoPerCourier_{{ $payment[0] }}" class="col-sm-4">${{ $payment[4] }}</div>
                                                 <div class="col-sm-4">
-                                                    <a href="#" onclick="editPaymentAmount()"><i id="editPaymentAmount"
-                                                                                                class="fas fa-edit"></i></a>
+                                                    <a onclick="editPaymentAmount({{ $payment[0] }})">
+                                                        <i id="editPaymentAmount" class="fas fa-edit"></i>
+                                                    </a>
                                                 </div>
                                             </div>
                                         </td>
@@ -76,6 +77,47 @@
         </div>
     </section>
 
+    <div class="modal fade" id="montoModal" tabindex="-1" aria-labelledby="montoModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="montoModalLabel">Actualizar monto</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="montoForm" method="POST">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <input type="hidden" id="montoId" name="montoId">
+                                <div class="form-group">
+                                    <label>Monto</label>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-dollar-sign"></i></span>
+                                        </div>
+                                        <input type="number" class="form-control" placeholder="Monto" id="monto" name="monto" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="btn-group w-100" role="group">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                    Cancelar
+                                </button>
+                                <button type="submit" class="btn btn-success">
+                                    Guardar
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
 @section('script')
 
@@ -88,7 +130,36 @@
                 "responsive": true,
                 "buttons": ['excel', 'pdf', 'colvis']
             }).buttons().container().appendTo('#tablaPagos_wrapper .col-md-6:eq(0)');
+
+            $('#montoForm').submit(event => {
+
+                event.preventDefault();
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+
+                $.ajax({
+                    url: '{{ url("/pagos/updatemonto") }}',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: { id: $('#montoId').val(), monto: $('#monto').val() },
+                })
+                .done(response => {
+                    alert( response.message );
+                    $(`#montoPerCourier_${$('#montoId').val()}`).html('$' + $('#monto').val());
+                    $('#montoModal').modal('hide');
+                });
+            });
         });
+
+        function editPaymentAmount(id) 
+        {
+            $('#montoId').val(id);
+            $('#montoModal').modal('show');
+        }
     </script>
 
 @endsection

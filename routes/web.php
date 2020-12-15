@@ -40,8 +40,8 @@ Route::get('/resumen/pagosurbo/{id}', [ResumeController::class, 'detallesPagosUr
 Route::get('/resumen/pagosrepartido/{id}', [ResumeController::class, 'detallesPagosRepartidor']);
 Route::get('/resumen/cortes/{id}', [ResumeController::class, 'detallesCortes']);
 
-
 Route::resource('/pagos', ChargeController::class);
+Route::post('/pagos/updatemonto', [ChargeController::class, 'updateMonto']);
 
 Route::get('/configuracion', [SettingsController::class, 'index']);
 Route::post('/concepto', [SettingsController::class, 'SaveConcept']);

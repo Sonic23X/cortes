@@ -153,4 +153,21 @@ class ChargeController extends Controller
     {
         //
     }
+
+    public function updateMonto(Request $request)
+    {
+        $request->validate([
+            'monto' => ['required', 'numeric'],
+            'id' => ['required'],
+        ]);
+
+        $data = 
+        [
+            'amount' => $request->get('monto'),
+        ];      
+
+        Payment::where('id', $request->get('id'))->update($data);
+
+        return response(['message' => '¡Monto actualizado!'], 200);
+    }
 }
