@@ -42,70 +42,71 @@
                             @endif
                             <form action="{{ url('/flujo') }}" method="POST">
                                 @csrf
+                                
                                 <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label>Tipo de Movimiento</label>
-                                            <div class="input-group mb-3">
-                                                <select class="form-control" name="tipo">
-                                                    <option value="1" selected="selected">Cargo</option>
-                                                    <option value="2">Pago</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Cantidad</label>
-                                            <div class="input-group">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text">$</span>
-                                                </div>
-                                                <input type="number" class="form-control" name="cantidad">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label>Elige Concepto</label>
-                                            <select class="form-control" name="concepto" id="concepto">
-                                                @foreach ($concepts as $concept)
-                                                    <option value="{{ $concept->id }}">{{ $concept->concept }}</option>                                    
-                                                @endforeach
+                                    <div class="form-group col-4">
+                                        <label>Tipo de Movimiento</label>
+                                        <div class="input-group mb-3">
+                                            <select class="form-control" name="tipo">
+                                                <option value="1" selected="selected">Egreso</option>
+                                                <option value="2">Ingreso</option>
                                             </select>
                                         </div>
-                                        <div class="form-group">
-                                            <label>Detalle:</label>
-                                            <div class="input-group">
-                                                <input type="text" class="form-control" placeholder="Ingrese detalle" name="detalle">
+                                    </div>
+                                    <div class="form-group col-4">
+                                        <label>Elige Concepto</label>
+                                        <select class="form-control" name="concepto" id="concepto">
+                                            @foreach ($concepts as $concept)
+                                                <option value="{{ $concept->id }}">{{ $concept->concept }}</option>                                    
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-4">
+                                        <label>Cuenta</label>
+                                        <select class="form-control" name="cuenta">
+                                        @foreach ($accounts as $account)
+                                            <option value="{{ $account->id }}">{{ $account->name }}</option>                                    
+                                        @endforeach
+                                        </select>
+                                    </div>
+                                                                
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-4">
+                                        <label>Cantidad</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">$</span>
                                             </div>
-                                        </div>
-                                        <div class="form-group" id="courier_input">
-                                            <label>Elegir Repartidor:</label>
-                                            <div class="input-group">
-                                                <select class="form-control select2 select2-danger" data-dropdown-css-class="select2-danger" name="repartidor">
-                                                @foreach ($couriers as $courier)
-                                                    <option value="{{ $courier[0] }}">{{ $courier[1] }}</option>                                    
-                                                @endforeach
-                                                </select>
-                                            </div>
+                                            <input type="number" class="form-control" name="cantidad">
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label>Cuenta</label>
-                                            <select class="form-control" name="cuenta">
-                                            @foreach ($accounts as $account)
-                                                <option value="{{ $account->id }}">{{ $account->name }}</option>                                    
+                                    <div class="form-group col-4">
+                                        <label>Detalle:</label>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" placeholder="Ingrese detalle" name="detalle">
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-4">
+                                        <label>Fecha:</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                            </div>
+                                            <input type="date" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" name="fecha">
+                                        </div>
+                                    </div>                          
+                                </div>
+                                <div class="row" style="display: flex; align-items: center; justify-content: center;">
+                                    <div class="form-group col-4" id="courier_input">
+                                        <label>Elegir Repartidor:</label>
+                                        <div class="input-group">
+                                            <select class="form-control select2 select2-danger" data-dropdown-css-class="select2-danger" name="repartidor">
+                                            @foreach ($couriers as $courier)
+                                                <option value="{{ $courier[0] }}">{{ $courier[1] }}</option>                                    
                                             @endforeach
                                             </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Fecha:</label>
-                                            <div class="input-group">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
-                                                </div>
-                                                <input type="date" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" name="fecha">
-                                            </div>
                                         </div>
                                     </div>
                                 </div>

@@ -27,7 +27,7 @@
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <div class="row">
-                                                        <div class="col-sm-2">
+                                                        <div class="col-sm-3">
                                                             <h5 style="font-weight: bold;">De:</h5>
                                                         </div>
                                                         <div class="col-sm-8">
@@ -183,7 +183,7 @@
 
                                     <div class="form-group">
                                         <label>Cantidad Total de Corte</label>
-                                        <div class="input-group">
+                                        <div class="input-group">|
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">$</span>
                                             </div>

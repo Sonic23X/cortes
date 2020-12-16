@@ -42,7 +42,7 @@
                                 <tfoot>
                                     <tr style="text-align: center;">
                                         <th>Corte</th>
-                                        <th>Monto</th>>
+                                        <th>Monto</th>
                                     </tr>
                                 </tfoot>
                             </table>

@@ -36,42 +36,34 @@
                             @endif
                             @csrf
                                 <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Nombre(s)</label>
-                                            <div class="input-group mb-3">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text"><i class="fas fa-user"></i></span>
-                                                </div>
-                                                <input type="text" name="nombre" class="form-control" placeholder="Nombre(s)">
+                                    <div class="form-group col-6">
+                                        <label>Nombre(s)</label>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-user"></i></span>
                                             </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Status</label>
-                                            <select class="form-control select2" name="status">
-                                                <option value="1" selected="selected">Activo</option>
-                                                <option value="0">Inactivo</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>¿Se le asigna terminal?</label>
-                                            <select class="form-control select2">
-                                                <option value="1" selected="selected">Sí</option>
-                                                <option value="0">No</option>
-                                            </select>
+                                            <input type="text" name="nombre" class="form-control" placeholder="Nombre(s)">
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Apellidos</label>
-                                            <div class="input-group mb-3">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text"><i class="fas fa-user"></i></span>
-                                                </div>
-                                                <input type="text" name="apellidos" class="form-control" placeholder="Apellidos">
+                                    <div class="form-group col-6">
+                                        <label>Apellidos</label>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-user"></i></span>
                                             </div>
+                                            <input type="text" name="apellidos" class="form-control" placeholder="Apellidos">
                                         </div>
-                                    <div class="form-group">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-6">
+                                        <label>Status</label>
+                                        <select class="form-control select2" name="status">
+                                            <option value="1" selected="selected">Activo</option>
+                                            <option value="0">Inactivo</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-6">
                                         <label>Correo Electrónico</label>
                                         <div class="input-group mb-3">
                                             <div class="input-group-prepend">
@@ -80,8 +72,16 @@
                                             <input type="email" name="email" class="form-control" placeholder="Correo Electrónico">
                                         </div>
                                     </div>
-
-                                    <div class="form-group">
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-6">
+                                        <label>¿Se le asigna terminal?</label>
+                                        <select class="form-control select2">
+                                            <option value="1" selected="selected">Sí</option>
+                                            <option value="0">No</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-6">
                                         <label>Número de Terminal</label>
                                         <div class="input-group mb-3">
                                             <div class="input-group-prepend">
@@ -90,8 +90,6 @@
                                             <input type="text" class="terminal" name="terminal" class="form-control" placeholder="Número de terminal">
                                         </div>
                                     </div>
-
-                                </div>
                                 </div>
                                 <div class="row">
                                     <button type="submit" class="btn btn-block btn-primary">Registrar Usuario</button>

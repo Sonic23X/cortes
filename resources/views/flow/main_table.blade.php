@@ -59,7 +59,7 @@
                                             </div>
                                             <div class="col-sm-4">
                                                 <div class="row">
-                                                    <div class="col-sm-2">
+                                                    <div class="col-sm-3">
                                                         <h5 style="font-weight: bold;">De:</h5>
                                                     </div>
                                                     <div class="col-sm-8">
@@ -101,7 +101,7 @@
                                         </div>
                                     </div>
                                     <div class="col-sm-2"> 
-                                        <a id="registerPaid" href="{{ url( '/flujo/create') }}" class="btn btn-secondary float-right">Agregar Depósito</a>
+                                        <a id="registerPaid" href="{{ url( '/flujo/create') }}" class="btn btn-secondary float-right">Agregar Movimiento</a>
                                     </div>
                                 </div>
                             </div>
