@@ -1,0 +1,7 @@
+@extends('base.layouts.app')
+
+@section('content')
+    <div class="row">
+        
+    </div>
+@endsection
