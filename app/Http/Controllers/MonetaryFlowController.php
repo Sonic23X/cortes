@@ -124,7 +124,7 @@ class MonetaryFlowController extends Controller
         $concept = Concept::where('id', $request->get('concepto'))->first();
 
         // Get the last register of the date
-        $last_row = AccountMovement::where('date', '<=', $fechaRequest)
+        $last_row = AccountMovement::where('date', '<', $fechaRequest)
                                    ->where('id_account', $request->get('cuenta'))
                                    ->orderBy('date', 'desc')
                                    ->first();
@@ -132,7 +132,7 @@ class MonetaryFlowController extends Controller
         if ($last_row != null)
             $last_row = $last_row->balance;
         else
-            $last_row = $account->amount;
+            $last_row = 0;
 
         switch ($concept->heading)
         {
@@ -185,7 +185,7 @@ class MonetaryFlowController extends Controller
 
         // Actualizamos el resto de registros posteriores a esa fecha
         $last_balance = 0;
-        $post_rows = AccountMovement::where('date', '>=', $fechaRequest)
+        $post_rows = AccountMovement::where('date', '>', $fechaRequest)
                                     ->where('id_account', $request->get('cuenta'))
                                     ->where('id', '!=', $actual_movement->id)
                                     ->orderBy('date', 'asc')

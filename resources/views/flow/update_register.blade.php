@@ -129,7 +129,7 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <button type="submit" class="btn btn-block btn-primary">Registrar</button>
+                                    <button type="submit" class="btn btn-block btn-primary">Actualizar</button>
                                 </div>
                             </form>
                         </div>

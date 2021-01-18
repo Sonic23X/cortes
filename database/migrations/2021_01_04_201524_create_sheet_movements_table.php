@@ -15,7 +15,14 @@ class CreateSheetMovementsTable extends Migration
     {
         Schema::create('sheet_movements', function (Blueprint $table) {
             $table->id();
+            $table->unsignedInteger('id_sheet');
+            $table->string('details')->nullable();
+            $table->dateTime('date');
+            $table->string('type');
+            $table->float('amount');
+            $table->float('balance')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
