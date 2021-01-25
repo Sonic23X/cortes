@@ -57,7 +57,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">$</span>
                                             </div>
-                                            <input type="number" class="form-control" step="any" name="madero" value="{{ $movement->amount_madero }}">
+                                            <input type="number" step="any" class="form-control" name="madero" value="{{ $movement->amount_madero }}">
                                         </div>
                                     </div>                      
                                 </div>
@@ -69,7 +69,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">$</span>
                                             </div>
-                                            <input type="number" class="form-control" step="any" name="repartos" value="{{ $movement->amount_repartos }}">
+                                            <input type="number" step="any" class="form-control" name="repartos" value="{{ $movement->amount_repartos }}">
                                         </div>
                                     </div>
                                     <div class="form-group col-4">
@@ -78,7 +78,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">$</span>
                                             </div>
-                                            <input type="number" class="form-control" step="any" name="urbo" value="{{ $movement->amount_urbo }}">
+                                            <input type="number" step="any" class="form-control" name="urbo" value="{{ $movement->amount_urbo }}">
                                         </div>
                                     </div>
                                     <div class="form-group col-4">
@@ -87,7 +87,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">$</span>
                                             </div>
-                                            <input type="number" class="form-control" step="any" name="repartidor_monto" value="{{ $movement->amount_repartidor }}">
+                                            <input type="number" step="any" class="form-control" name="repartidor_monto" value="{{ $movement->amount_repartidor }}">
                                         </div>
                                     </div>                         
                                 </div>

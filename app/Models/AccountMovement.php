@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\Concept;
 
 class AccountMovement extends Model
 {
@@ -38,27 +39,32 @@ class AccountMovement extends Model
     {   
         $instance = new static;
 
-        $accumulated = $instance::where('id_courier', $id_courier)->where('concept', $instance::CONCEPT_PAYMENT_TO_URBO)->sum('amount');
+        $concept = Concept::where('heading', Concept::HEADING_TO_URBO)->select('id')->get();
+        $accumulated = $instance::where('id_courier', $id_courier)->whereIn('concept', $concept )->sum('amount');
 
-        return $accumulated;
+        return ( $accumulated != null) ? $accumulated : 0;
     }
 
     public static function paymentsToCourier($id_courier)
     {   
         $instance = new static;
 
-        $accumulated = $instance::where('id_courier', $id_courier)->where('concept', $instance::CONCEPT_PAYMENT_TO_COURIER)->sum('amount');
+        $concept = Concept::where('heading', Concept::HEADING_TO_COURIER)->select('id')->get();
 
-        return $accumulated;
+        $accumulated = $instance::where('id_courier', $id_courier)->whereIn('concept', $concept )->sum('amount');
+
+        return ( $accumulated != null) ? $accumulated : 0;
     }
 
     public function scopeTypeToUrbo($query)
     {
-        return $query->where('concept', $this::CONCEPT_PAYMENT_TO_URBO);
+        $concept = Concept::where('heading', Concept::HEADING_TO_URBO)->select('id')->get();
+        return $query->where('concept', $concept);
     }
 
     public function scopeTypeToCourier($query)
     {
-        return $query->where('concept', $this::CONCEPT_PAYMENT_TO_COURIER);
+        $concept = Concept::where('heading', Concept::HEADING_TO_COURIER)->select('id')->get();
+        return $query->where('concept', $concept);
     }
 }

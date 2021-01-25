@@ -74,7 +74,7 @@ Route::middleware('auth')->group(function() {
     Route::post('/negocio', [SettingsController::class, 'SavePlace']);
     Route::post('/hoja', [SettingsController::class, 'SaveSheet']);
 
-    Route::resource( '/saldos', BalanceController::class );
+    Route::resource('/saldos', BalanceController::class);
 
     Route::resource('/hojas', SheetController::class);
 });

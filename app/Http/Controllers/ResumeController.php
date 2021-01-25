@@ -9,6 +9,7 @@ use App\Models\History;
 use App\Models\Account;
 use App\Models\Payment;
 use App\Models\AccountMovement;
+use App\Models\Madero;
 
 class ResumeController extends Controller
 {
@@ -29,19 +30,27 @@ class ResumeController extends Controller
             ];
         });
 
+        $pagos_a_repartidor = AccountMovement::paymentsToCourier(3);
+
         $tableColumns = $couriers->map(function($courier) {
             
             $pedidos_cobrados = Payment::getAmountPerCourier($courier->id);
             $pagos_a_urbo = AccountMovement::paymentsToUrbo($courier->id);
             $pagos_a_repartidor = AccountMovement::paymentsToCourier($courier->id);
+            
+            $maderos = Madero::where('id_courier', $courier->id)->first();
+            $maderos_total = 0;
+            if ($maderos != null)
+                $maderos_total = $maderos->amount_madero + $maderos->amount_repartos - $maderos->amount_urbo + $maderos->amount_repartidor;
 
             $cortes = History::historyPerCourier($courier->id);
 
-            $saldo = $pedidos_cobrados + $cortes - $pagos_a_urbo - $pagos_a_repartidor;
+            $saldo = $maderos_total + $pedidos_cobrados + $cortes - $pagos_a_urbo - $pagos_a_repartidor;
 
             return [
                 $courier->id,
                 $courier->name . ' ' . $courier->last_name,
+                $maderos_total,
                 $pedidos_cobrados,
                 $pagos_a_urbo,
                 $pagos_a_repartidor,
@@ -56,6 +65,7 @@ class ResumeController extends Controller
             'couriers' => $autocomplete,
             'columns' => $tableColumns,
         ];
+
         return view('summary/summary_main_table', $view_data);
     }
 

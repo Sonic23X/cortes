@@ -72,7 +72,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">$</span>
                                             </div>
-                                            <input type="number" class="form-control" name="monto" value="{{ old('monto') }}">
+                                            <input type="number" step="any" class="form-control" name="monto" value="{{ old('monto') }}">
                                         </div>
                                     </div>
                                 </div>

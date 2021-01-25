@@ -505,9 +505,8 @@ class MonetaryFlowController extends Controller
         $account = Account::find($delete_row->id_account);
         $balance = ( $delete_row->type == AccountMovement::TYPE_CHARGE ) ? $delete_row->balance + $delete_row->amount : $delete_row->balance - $delete_row->amount;
         $last_balance = 0;
-        $post_rows = AccountMovement::where('date', '>=', $delete_row->date)
+        $post_rows = AccountMovement::where('date', '>', $delete_row->date)
                                     ->where('id_account', $delete_row->id_account)
-                                    ->where('id', '!=', $delete_row->id)
                                     ->orderBy('date', 'asc')
                                     ->select('id','type', 'amount', 'balance')
                                     ->get();

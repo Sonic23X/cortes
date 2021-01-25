@@ -17,4 +17,5 @@ class Madero extends Model
         'amount_urbo',
         'amount_repartidor',
     ];
+    
 }

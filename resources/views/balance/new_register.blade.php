@@ -52,7 +52,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">$</span>
                                             </div>
-                                            <input type="number" class="form-control" step="any" name="madero" value="{{ old('madero') }}">
+                                            <input type="number" step="any" class="form-control" name="madero" value="{{ old('madero') }}">
                                         </div>
                                     </div>                      
                                 </div>
@@ -64,7 +64,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">$</span>
                                             </div>
-                                            <input type="number" class="form-control" step="any" name="repartos" value="{{ old('repartos') }}">
+                                            <input type="number" step="any" class="form-control" name="repartos" value="{{ old('repartos') }}">
                                         </div>
                                     </div>
                                     <div class="form-group col-4">
@@ -73,7 +73,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">$</span>
                                             </div>
-                                            <input type="number" class="form-control" step="any" name="urbo" value="{{ old('urbo') }}">
+                                            <input type="number" step="any" class="form-control"name="urbo" value="{{ old('urbo') }}">
                                         </div>
                                     </div>
                                     <div class="form-group col-4">
@@ -82,7 +82,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">$</span>
                                             </div>
-                                            <input type="number" class="form-control" step="any" name="repartidor_monto" value="{{ old('repartidor_monto') }}">
+                                            <input type="number" step="any" class="form-control" name="repartidor_monto" value="{{ old('repartidor_monto') }}">
                                         </div>
                                     </div>                         
                                 </div>

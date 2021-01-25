@@ -28,6 +28,7 @@
                                 <thead>
                                     <tr style="text-align: center;">
                                         <th>Repartidor</th>
+                                        <th>Saldo anterior</th>
                                         <th>Pedidos Cobrados</th>
                                         <th>Pagos del repartidor a Urbo</th>
                                         <th>Pagos de Urbo a repartidor</th>
@@ -39,28 +40,14 @@
                                     @foreach($columns as $column)
                                     <tr>
                                         <td>{{ $column[1] }}</td>
-                                        <td>
-                                            <div class="row">
-                                                <div class="col-sm-2"></div>
-                                                <div id="noTerminal" class="col-sm-6">${{ $column[2] }}</div>
-                                                <div class="col-sm-4">
-                                                    <a href="{{ url('/resumen/pedidoscobrados/'.$column[0]  ) }}"><i class="fas fa-info-circle"></i></a></div>
-                                            </div>
-                                        </td>
+                                        <td>${{ $column[2] }}</td>
                                         <td>
                                             <div class="row">
                                                 <div class="col-sm-2"></div>
                                                 <div id="noTerminal" class="col-sm-6">${{ $column[3] }}</div>
                                                 <div class="col-sm-4">
-                                                    <a href="{{ url('/resumen/pagosurbo/'.$column[0]  ) }}"><i class="fas fa-info-circle"></i></a></div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="row">
-                                                <div class="col-sm-2"></div>
-                                                <div id="noTerminal" class="col-sm-6">${{ $column[4] }}</div>
-                                                <div class="col-sm-4">
-                                                    <a href="{{ url('/resumen/pagosrepartido/'.$column[0]  ) }}"><i class="fas fa-info-circle"></i></a></div>
+                                                    <a href="{{ url('/resumen/pedidoscobrados/'.$column[0]  ) }}"><i class="fas fa-info-circle"></i></a>
+                                                </div>
                                             </div>
                                         </td>
                                         <td>
@@ -68,16 +55,36 @@
                                                 <div class="col-sm-2"></div>
                                                 <div id="noTerminal" class="col-sm-6">${{ $column[5] }}</div>
                                                 <div class="col-sm-4">
-                                                    <a href="{{ url('/resumen/cortes/'.$column[0]  ) }}"><i class="fas fa-info-circle"></i></a></div>
+                                                    <a href="{{ url('/resumen/pagosrepartido/'.$column[0]  ) }}"><i class="fas fa-info-circle"></i></a>
+                                                </div>
                                             </div>
                                         </td>
-                                        <td>${{ $column[6] }}</td>
+                                        <td>
+                                            <div class="row">
+                                                <div class="col-sm-2"></div>
+                                                <div id="noTerminal" class="col-sm-6">${{ $column[4] }}</div>
+                                                <div class="col-sm-4">
+                                                    <a href="{{ url('/resumen/pagosurbo/'.$column[0]  ) }}"><i class="fas fa-info-circle"></i></a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="row">
+                                                <div class="col-sm-2"></div>
+                                                <div id="noTerminal" class="col-sm-6">${{ $column[6] }}</div>
+                                                <div class="col-sm-4">
+                                                    <a href="{{ url('/resumen/cortes/'.$column[0]  ) }}"><i class="fas fa-info-circle"></i></a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>${{ $column[7] }}</td>
                                     </tr>
                                     @endforeach
                                 </tbody>
                                 <tfoot>
                                     <tr style="text-align: center;">
                                         <th>Repartidor</th>
+                                        <th>Saldo anterior</th>
                                         <th>Pedidos Cobrados</th>
                                         <th>Pagos del repartidor a Urbo</th>
                                         <th>Pagos de Urbo a repartidor</th>
