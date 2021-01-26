@@ -48,6 +48,9 @@
                                             <a href="{{ url('/retenciones/' . $column[0] .'/edit') }}" class="text-primary" style="cursor:pointer;">
                                                 <i class="fas fa-edit"></i>
                                             </a>
+                                            <a onclick="removeRow({{ $column[0] }})" class="text-danger" style="cursor:pointer;">
+                                                <i class="fas fa-times"></i>
+                                            </a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -80,6 +83,34 @@
             
             dtSummary.buttons().container().appendTo('#tablaMadero_wrapper .col-md-6:eq(0)');
         });
+
+        function removeRow(id) {
+            
+            let confirmacion = confirm('¿Estas seguro de eliminar el registro?');
+            
+            if (confirmacion) 
+            {
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+
+                $.ajax({
+                    url: `{{ url("/retenciones") }}/${id}` ,
+                    type: 'DELETE',
+                    dataType: 'json',
+                })
+                .done(response => {
+                    alert(response.message)
+                    location.reload();
+                })
+                .always(function (response, textStatus, jqXHR) {
+                    if(jqXHR.status != 200) 
+                        alert(response.responseJSON.message);
+                });
+            }
+        }
     </script>
 
 @endsection

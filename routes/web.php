@@ -9,7 +9,7 @@ use App\Http\Controllers\ResumeController;
 use App\Http\Controllers\ChargeController;
 use App\Http\Controllers\BalanceController;
 use App\Http\Controllers\SheetController;
-use App\Http\Controllers\RetetionController;
+use App\Http\Controllers\RetentionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -79,5 +79,5 @@ Route::middleware('auth')->group(function() {
 
     Route::resource('/hojas', SheetController::class);
 
-    Route::resource('/retenciones', RetetionController::class);
+    Route::resource('/retenciones', RetentionController::class);
 });

@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Retetion;
 use App\Models\User;
 
-class RetetionController extends Controller
+class RetentionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -112,11 +112,9 @@ class RetetionController extends Controller
     {
         $couriers = User::typeCourier()->get();
 
-        //dd(Retetion::find($id));
-
         $view_data = 
         [
-            'title' => 'Nueva retencion',
+            'title' => 'Actualizar retencion',
             'couriers' => $couriers,
             'movement' => Retetion::find($id),
         ];
@@ -159,6 +157,7 @@ class RetetionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Retetion::where('id', $id)->delete();
+        return response(['message' => '¡Registro eliminado con exito!'], 200);
     }
 }

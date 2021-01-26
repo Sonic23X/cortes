@@ -9,7 +9,7 @@
                 </div>
                 <div class="col-sm-6">
                     <div class="float-sm-right">
-                        <a href="{{ url( '/retenciones') }}" class="btn btn-secondary">Atrás</a>
+                        <a href="{{ url( '/retenciones/' . $movement->id) }}" class="btn btn-secondary">Atrás</a>
                     </div>
                 </div>
             </div>
@@ -31,8 +31,9 @@
                                 </ul>
                             </div>
                             @endif
-                            <form action="{{ url('/retenciones') }}" method="POST">
+                            <form action="{{ url('/retenciones/' . $movement->id) }}" method="POST">
                                 @csrf
+                                @method('PUT')
                                 <div class="row">
                                     <div class="form-group col-6">
                                         <label>Fecha:</label>
@@ -84,7 +85,7 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <button type="submit" class="btn btn-block btn-primary">Registrar Pago</button>
+                                    <button type="submit" class="btn btn-block btn-primary">Actualizar</button>
                                 </div>
                             </form>
                         </div>

@@ -8,8 +8,9 @@ use App\Models\Place;
 use App\Models\History;
 use App\Models\Account;
 use App\Models\Payment;
-use App\Models\AccountMovement;
 use App\Models\Madero;
+use App\Models\Retetion;
+use App\Models\AccountMovement;
 
 class ResumeController extends Controller
 {
@@ -30,12 +31,12 @@ class ResumeController extends Controller
             ];
         });
 
-        $pagos_a_repartidor = AccountMovement::paymentsToCourier(3);
-
         $tableColumns = $couriers->map(function($courier) {
+
+            $retencion_repartidor = Retetion::where('id_courier', $courier->id)->sum('amount');
             
             $pedidos_cobrados = Payment::getAmountPerCourier($courier->id);
-            $pagos_a_urbo = AccountMovement::paymentsToUrbo($courier->id);
+            $pagos_a_urbo = ( AccountMovement::paymentsToUrbo($courier->id) + $retencion_repartidor);
             $pagos_a_repartidor = AccountMovement::paymentsToCourier($courier->id);
             
             $maderos = Madero::where('id_courier', $courier->id)->first();
