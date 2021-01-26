@@ -53,18 +53,18 @@
                                         <td>
                                             <div class="row">
                                                 <div class="col-sm-2"></div>
-                                                <div id="noTerminal" class="col-sm-6">${{ $column[5] }}</div>
+                                                <div id="noTerminal" class="col-sm-6">${{ $column[4] }}</div>
                                                 <div class="col-sm-4">
-                                                    <a href="{{ url('/resumen/pagosrepartido/'.$column[0]  ) }}"><i class="fas fa-info-circle"></i></a>
+                                                    <a href="{{ url('/resumen/pagosurbo/'.$column[0]  ) }}"><i class="fas fa-info-circle"></i></a>
                                                 </div>
                                             </div>
                                         </td>
                                         <td>
                                             <div class="row">
                                                 <div class="col-sm-2"></div>
-                                                <div id="noTerminal" class="col-sm-6">${{ $column[4] }}</div>
+                                                <div id="noTerminal" class="col-sm-6">${{ $column[5] }}</div>
                                                 <div class="col-sm-4">
-                                                    <a href="{{ url('/resumen/pagosurbo/'.$column[0]  ) }}"><i class="fas fa-info-circle"></i></a>
+                                                    <a href="{{ url('/resumen/pagosrepartido/'.$column[0]  ) }}"><i class="fas fa-info-circle"></i></a>
                                                 </div>
                                             </div>
                                         </td>

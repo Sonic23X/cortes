@@ -59,12 +59,12 @@ class AccountMovement extends Model
     public function scopeTypeToUrbo($query)
     {
         $concept = Concept::where('heading', Concept::HEADING_TO_URBO)->select('id')->get();
-        return $query->where('concept', $concept);
+        return $query->whereIn('concept', $concept);
     }
 
     public function scopeTypeToCourier($query)
     {
         $concept = Concept::where('heading', Concept::HEADING_TO_COURIER)->select('id')->get();
-        return $query->where('concept', $concept);
+        return $query->whereIn('concept', $concept);
     }
 }
