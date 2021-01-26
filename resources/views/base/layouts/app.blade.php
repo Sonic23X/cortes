@@ -116,6 +116,14 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a href="{{ url('/retenciones') }}" class="nav-link">
+                            <i class="nav-icon fas fa-minus"></i>
+                            <p>
+                                Retenciones
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item d-none">
                         <a href="{{ url('/hojas') }}" class="nav-link">
                             <i class="nav-icon fas fa-file-invoice-dollar"></i>
                             <p>
