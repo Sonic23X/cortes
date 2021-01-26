@@ -141,7 +141,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">$</span>
                                             </div>
-                                            <input type="number" class="form-control" name="montoCorte" id="montoCorte" required>
+                                            <input type="number" step="any" class="form-control" name="montoCorte" id="montoCorte" required>
                                         </div>
                                     </div>
                                 </div>
