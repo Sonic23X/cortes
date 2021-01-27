@@ -12,6 +12,7 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable, SoftDeletes;
 
+    const TYPE_ROOT = 'root';
     const TYPE_ADMIN = 'admin';
     const TYPE_COURIER = 'courier';
 

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class LoginController extends Controller
 {
@@ -33,7 +34,10 @@ class LoginController extends Controller
 
         switch ($user_type) 
         {
-            case 'admin':
+            case User::TYPE_ADMIN:
+                return '/inicio';
+                break;
+            case User::TYPE_ROOT:
                 return '/inicio';
                 break;
             case 'courier':
@@ -41,10 +45,11 @@ class LoginController extends Controller
                 return '/';
                 break; 
             default:
+                Auth::logout();
                 return '/'; 
                 break;
         }
-      }
+    }
 
     /**
      * Create a new controller instance.
