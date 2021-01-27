@@ -81,16 +81,25 @@
                                 <thead>
                                     <tr>
                                         <th>Fecha</th>
-                                        <th>Cuenta</th>
+                                        <th>Cuenta / Pedido</th>
                                         <th>Monto</th>
                                     </tr>
                                 </thead>
                                 <tbody id="tablaPagosAUrboBody">
                                     @php( $total = 0 )
-                                    @foreach($columns as $column)
+                                    @foreach($columns1 as $column)
                                     <tr>
                                         <td>{{ $column[1] }}</td>
                                         <td>{{ $column[2] }}</td>
+                                        <td>${{ $column[3] }}</td>
+                                        @php( $total += $column[3] )
+                                    </tr>
+                                    @endforeach
+                                    
+                                    @foreach($columns2 as $column)
+                                    <tr>
+                                        <td>{{ $column[1] }}</td>
+                                        <td>{!! $column[2] !!}</td>
                                         <td>${{ $column[3] }}</td>
                                         @php( $total += $column[3] )
                                     </tr>
@@ -125,6 +134,7 @@
                 "responsive": true,
                 'bInfo' : false,
                 'pageLength': 10,
+                'order': [[0, 'asc']],
                 "buttons": ['excel', 'pdf']
             });
             dtToUrbo.buttons().container().appendTo('#tablaPagosAUrbo_wrapper .col-md-6:eq(0)');
