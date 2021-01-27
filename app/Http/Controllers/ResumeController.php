@@ -46,7 +46,7 @@ class ResumeController extends Controller
 
             $cortes = History::historyPerCourier($courier->id);
 
-            $saldo = $maderos_total + $pedidos_cobrados + $cortes - $pagos_a_urbo - $pagos_a_repartidor;
+            $saldo = $maderos_total + $pedidos_cobrados + $cortes - $pagos_a_urbo + $pagos_a_repartidor;
 
             return [
                 $courier->id,
@@ -240,7 +240,7 @@ class ResumeController extends Controller
 
         $pagos_urbo = AccountMovement::where('id_courier', $id)->typeToUrbo()->get();
 
-        $tableColumns = $pagos_urbo->map(function($pago_urbo) {
+        $tableColumns1 = $pagos_urbo->map(function($pago_urbo) {
 
             $cuenta = Account::find($pago_urbo->id_account);
 
@@ -252,11 +252,24 @@ class ResumeController extends Controller
             ];
         });
 
+        $retentions = Retetion::where('id_courier', $id)->get();
+
+        $tableColumns2 = $retentions->map(function($retention) {
+
+            return [
+                $retention->id,
+                explode(' ', $retention->date)[0],
+                '<span class="badge bg-danger">Pedido reembolsado: ' . $retention->id_order . '</span>',
+                $retention->amount
+            ];
+        });
+
         $view_data = 
         [
             'title' => 'Usuarios',
             'courier' => $courier,
-            'columns' => $tableColumns,
+            'columns1' => $tableColumns1,
+            'columns2' => $tableColumns2,
         ];
 
         return view( 'summary/summary_payment_to_urbo_detail', $view_data );
