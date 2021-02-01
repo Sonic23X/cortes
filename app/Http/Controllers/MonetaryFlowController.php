@@ -7,6 +7,7 @@ use App\Models\AccountMovement;
 use App\Models\Account;
 use App\Models\Concept;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class MonetaryFlowController extends Controller
 {
@@ -53,11 +54,22 @@ class MonetaryFlowController extends Controller
             ];
         });
 
+        $accounts = null;
+        switch(Auth::user()->type) 
+        {
+            case User::TYPE_ROOT:
+                $accounts = Account::all();
+                break;
+            case User::TYPE_ADMIN:
+                $accounts = Account::where('display', Account::DISPLAY_ALL_USERS)->get();
+                break;
+        }
+
         $view_data =
         [
             'title' => 'Flujo financiero',
             // Custom data of view
-            'accounts' => Account::all(),
+            'accounts' => $accounts,
             'movements' => $tableColumns,
         ];
         return view( 'flow.main_table', $view_data );
@@ -80,12 +92,23 @@ class MonetaryFlowController extends Controller
             ];
         });
 
+        $accounts = null;
+        switch(Auth::user()->type) 
+        {
+            case User::TYPE_ROOT:
+                $accounts = Account::all();
+                break;
+            case User::TYPE_ADMIN:
+                $accounts = Account::where('display', Account::DISPLAY_ALL_USERS)->get();
+                break;
+        }
+
         $view_data =
         [
             'title' => 'Dashboard',
             'couriers' => $autocomplete,
             'concepts' => Concept::all(),
-            'accounts' => Account::all(),
+            'accounts' => $accounts,
         ];
         return view( 'flow.new_register', $view_data );
     }

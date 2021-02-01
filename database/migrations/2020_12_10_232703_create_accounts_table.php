@@ -17,6 +17,7 @@ class CreateAccountsTable extends Migration
             $table->id();
             $table->string('name');
             $table->float('amount');
+            $table->integer('display');
             $table->timestamps();
             $table->softDeletes();
         });

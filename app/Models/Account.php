@@ -10,6 +10,9 @@ class Account extends Model
 {
     use HasFactory, SoftDeletes;
 
+    const DISPLAY_ALL_USERS = 1;
+    const DISPLAY_ROOT_USERS = 2;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -18,6 +21,7 @@ class Account extends Model
     protected $fillable = [
         'name',
         'amount',
+        'display',
     ];
 
     public static function updateAmount($id, $balance)

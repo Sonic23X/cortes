@@ -248,6 +248,17 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row mt-3">
+                            <div class="col-md-12">
+                                <label>Visibilidad</label>
+                                <div class="input-group">
+                                    <select class="custom-select" name="acceso">
+                                        <option value="1">Todos los administradores</option>
+                                        <option value="2">Con restrincción</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
                         <div class="row mt-4">
                             <div class="btn-group w-100" role="group">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">

@@ -157,7 +157,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fas fa-dollar-sign"></i></span>
                                         </div>
-                                        <input type="number" class="form-control" placeholder="Monto" id="monto" name="monto" required>
+                                        <input type="number" step="any" class="form-control" placeholder="Monto" id="monto" name="monto" required>
                                     </div>
                                 </div>
                             </div>

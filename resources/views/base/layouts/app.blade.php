@@ -131,6 +131,7 @@
                             </p>
                         </a>
                     </li>
+                    @if(Auth::user()->type == App\Models\User::TYPE_ROOT)
                     <li class="nav-item">
                         <a href="{{ url( '/configuracion') }}" class="nav-link">
                             <i class="nav-icon fas fa-cog"></i>
@@ -139,6 +140,7 @@
                             </p>
                         </a>
                     </li>
+                    @endif
                 </ul>
             </nav>
         </div>

@@ -56,6 +56,7 @@ class SettingsController extends Controller
         [
             'name' => $request->get('nombre'),
             'amount' => 0,
+            'display' => ($request->get('acceso') == '1') ? Account::DISPLAY_ALL_USERS : Account::DISPLAY_ROOT_USERS,
         ];
 
         Account::create($data);
