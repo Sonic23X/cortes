@@ -22,7 +22,24 @@ class MonetaryFlowController extends Controller
     public function index()
     {
         $global_balance = 0;
-        $movements = AccountMovement::orderBy('date', 'asc')->get();
+        $accounts = null;
+        $movements = null;
+        switch(Auth::user()->type) 
+        {
+            case User::TYPE_ROOT:
+                $accounts = Account::all();
+                $movements = AccountMovement::orderBy('date', 'asc')->get();
+                break;
+            case User::TYPE_ADMIN:
+                $accounts = Account::where('display', Account::DISPLAY_ALL_USERS)->get();
+
+                $accountsID = $accounts->map(function($account) {
+                    return $account->id;
+                });
+
+                $movements = AccountMovement::whereIn('id_account', $accountsID)->orderBy('date', 'asc')->get();
+                break;
+        }
 
         $tableColumns = $movements->map(function($movement) {
 
