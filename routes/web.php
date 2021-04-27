@@ -76,6 +76,7 @@ Route::middleware('auth')->group(function() {
     Route::post('/hoja', [SettingsController::class, 'SaveSheet']);
 
     Route::resource('/saldos', BalanceController::class);
+    Route::post('/saldos/filtro', [BalanceController::class, 'filter']);
 
     Route::resource('/hojas', SheetController::class);
 

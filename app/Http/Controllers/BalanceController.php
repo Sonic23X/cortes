@@ -8,6 +8,8 @@ use App\Models\User;
 
 class BalanceController extends Controller
 {
+    private $filter = '';
+
     /**
      * Display a listing of the resource.
      *
@@ -17,9 +19,14 @@ class BalanceController extends Controller
     {
         $payments = Madero::all();
 
-        $payments_map = $payments->map(function($payment) {
+        $payments_map = $payments->map(function($payment) 
+        {
             
             $courier = User::where('id', $payment->id_courier)->first();
+
+            $total = $payment->amount_madero + $payment->amount_repartos;
+            $total -= $payment->amount_urbo;
+            $total += $payment->amount_repartidor;
 
             return [
                 $payment->id,
@@ -28,6 +35,7 @@ class BalanceController extends Controller
                 $payment->amount_repartos,
                 $payment->amount_urbo,
                 $payment->amount_repartidor,
+                $total,
             ];
         });
 
@@ -154,5 +162,51 @@ class BalanceController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function filter(Request $request)
+    {
+        $payments = Madero::all();
+
+        $this->filter = $request->get('filtro');
+
+        $payments_map = $payments->map(function($payment) 
+        {
+            $courier = User::where('id', $payment->id_courier)->first();
+
+            $total = $payment->amount_madero + $payment->amount_repartos;
+            $total -= $payment->amount_urbo;
+            $total += $payment->amount_repartidor;            
+
+            if( $this->filter == 'true')
+            {
+                if ($courier->status == 1) 
+                    return 
+                    [
+                        $payment->id,
+                        $courier->name . ' ' . $courier->last_name,
+                        $payment->amount_madero,
+                        $payment->amount_repartos,
+                        $payment->amount_urbo,
+                        $payment->amount_repartidor,
+                        $total,
+                    ];
+            }
+            else
+            {
+                return 
+                [
+                    $payment->id,
+                    $courier->name . ' ' . $courier->last_name,
+                    $payment->amount_madero,
+                    $payment->amount_repartos,
+                    $payment->amount_urbo,
+                    $payment->amount_repartidor,
+                    $total,
+                ];
+            }
+        });
+        
+        return response(['pagos' => $payments_map], 200);
     }
 }
