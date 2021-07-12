@@ -7,14 +7,16 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable, SoftDeletes;
+    use HasFactory, Notifiable, SoftDeletes, HasRoles;
 
-    const TYPE_ROOT = 'root';
-    const TYPE_ADMIN = 'admin';
-    const TYPE_COURIER = 'courier';
+    const ROL_ROOT = 'root';
+    const ROL_ADMIN = 'administrador';
+    const ROL_COURIER = 'repartidor';
+    const ROL_READER = 'lectura';
 
     const ACTIVE = 1;
     const NOT_ACTIVE = 0;
@@ -24,12 +26,12 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $fillable = [
+    protected $fillable = 
+    [
         'name',
         'last_name',
         'email',
         'password',
-        'type',
         'status',
         'terminal'
     ];
@@ -39,7 +41,8 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $hidden = [
+    protected $hidden = 
+    [
         'password',
         'remember_token',
     ];
@@ -49,23 +52,13 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $casts = [
+    protected $casts = 
+    [
         'email_verified_at' => 'datetime',
     ];
 
-    protected $dates = [
+    protected $dates = 
+    [
         'deleted_at'
     ];
-
-
-    /*
-    *
-    * Scopes
-    *
-    */
-
-    public function scopeTypeCourier($query)
-    {
-        return $query->where('type', $this::TYPE_COURIER);
-    }
 }

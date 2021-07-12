@@ -24,21 +24,22 @@ class MonetaryFlowController extends Controller
         $global_balance = 0;
         $accounts = null;
         $movements = null;
-        switch(Auth::user()->type) 
+
+        if (Auth::user()->hasRole(User::ROL_ROOT)) 
         {
-            case User::TYPE_ROOT:
-                $accounts = Account::all();
-                $movements = AccountMovement::orderBy('date', 'asc')->get();
-                break;
-            case User::TYPE_ADMIN:
-                $accounts = Account::where('display', Account::DISPLAY_ALL_USERS)->get();
+            $accounts = Account::all();
+            $movements = AccountMovement::orderBy('date', 'asc')->get();
+        }
+        else
+        {
+            $accounts = Account::where('display', Account::DISPLAY_ALL_USERS)->get();
 
-                $accountsID = $accounts->map(function($account) {
-                    return $account->id;
-                });
+            $accountsID = $accounts->map(function($account) 
+            {
+                return $account->id;
+            });
 
-                $movements = AccountMovement::whereIn('id_account', $accountsID)->orderBy('date', 'asc')->get();
-                break;
+            $movements = AccountMovement::whereIn('id_account', $accountsID)->orderBy('date', 'asc')->get();
         }
 
         $tableColumns = $movements->map(function($movement) {
@@ -72,15 +73,11 @@ class MonetaryFlowController extends Controller
         });
 
         $accounts = null;
-        switch(Auth::user()->type) 
-        {
-            case User::TYPE_ROOT:
-                $accounts = Account::all();
-                break;
-            case User::TYPE_ADMIN:
-                $accounts = Account::where('display', Account::DISPLAY_ALL_USERS)->get();
-                break;
-        }
+        if (Auth::user()->hasRole(User::ROL_ROOT)) 
+            $accounts = Account::all();
+        else
+            $accounts = Account::where('display', Account::DISPLAY_ALL_USERS)->get();
+        
 
         $view_data =
         [
@@ -99,26 +96,27 @@ class MonetaryFlowController extends Controller
      */
     public function create()
     {
-        $couriers = User::typeCourier()->get();
+        $roles = \Spatie\Permission\Models\Role::all();
+        $users = User::with('roles')->get();
+        $couriers = $users->reject(function ($user, $key)
+        {
+            return $user->hasAnyRole([User::ROL_ROOT, User::ROL_ADMIN, User::ROL_READER]);
+        });
 
-        $autocomplete = $couriers->map(function($courier) {
-
-            return [
+        $autocomplete = $couriers->map(function($courier) 
+        {
+            return 
+            [
                 $courier->id,
                 $courier->name . ' ' . $courier->last_name,
             ];
         });
 
         $accounts = null;
-        switch(Auth::user()->type) 
-        {
-            case User::TYPE_ROOT:
-                $accounts = Account::all();
-                break;
-            case User::TYPE_ADMIN:
-                $accounts = Account::where('display', Account::DISPLAY_ALL_USERS)->get();
-                break;
-        }
+        if (Auth::user()->hasRole(User::ROL_ROOT)) 
+            $accounts = Account::all();
+        else
+            $accounts = Account::where('display', Account::DISPLAY_ALL_USERS)->get();
 
         $view_data =
         [
@@ -260,11 +258,17 @@ class MonetaryFlowController extends Controller
      */
     public function edit($id)
     {
-        $couriers = User::typeCourier()->get();
+        $roles = \Spatie\Permission\Models\Role::all();
+        $users = User::with('roles')->get();
+        $couriers = $users->reject(function ($user, $key)
+        {
+            return $user->hasAnyRole([User::ROL_ROOT, User::ROL_ADMIN, User::ROL_READER]);
+        });
 
-        $autocomplete = $couriers->map(function($courier) {
-
-            return [
+        $autocomplete = $couriers->map(function($courier) 
+        {
+            return 
+            [
                 $courier->id,
                 $courier->name . ' ' . $courier->last_name,
             ];

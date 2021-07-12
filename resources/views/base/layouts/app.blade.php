@@ -61,7 +61,7 @@
 
     <aside class="main-sidebar sidebar-dark-primary elevation-4">        
         <a href="{{ url('home') }}" class="brand-link text-center">
-            <span class="brand-text font-weight-light">{{ config('app.name', 'Laravel') }}</span>
+            <span class="brand-text font-weight-light">{{ config('app.name', 'Cortes Urbo') }}</span>
         </a>
 
         <div class="sidebar">
@@ -131,7 +131,7 @@
                             </p>
                         </a>
                     </li>
-                    @if(Auth::user()->type == App\Models\User::TYPE_ROOT)
+                    @if(Auth::user()->hasRole('root'))
                     <li class="nav-item">
                         <a href="{{ url( '/configuracion') }}" class="nav-link">
                             <i class="nav-icon fas fa-cog"></i>
